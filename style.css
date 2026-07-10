@@ -850,3 +850,164 @@ h1 {
     font-size: 32px;
   }
 }
+/* -------------------- KÖVESD A NYILAKAT -------------------- */
+
+.arrow-task-card {
+  width: min(96vw, 900px);
+  max-width: none;
+  min-height: 125px;
+  padding: 14px 18px;
+}
+
+.arrow-task-row {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+}
+
+.arrow-start-animal {
+  width: 76px;
+  height: 76px;
+
+  flex: 0 0 auto;
+}
+
+.arrow-sequence {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-width: 0;
+}
+
+.arrow-symbol {
+  min-width: 45px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f3e8ff;
+  border: 3px solid #9c27b0;
+  border-radius: 14px;
+
+  color: #6b1680;
+
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1;
+
+  box-sizing: border-box;
+}
+
+.arrow-question {
+  min-width: 52px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fff3cd;
+  border: 3px solid #ff9800;
+  border-radius: 16px;
+
+  color: #7a4c00;
+
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 40px;
+  font-weight: 900;
+
+  box-sizing: border-box;
+  flex: 0 0 auto;
+}
+
+/* Kiinduló állat jelölése */
+
+.cell.start-position {
+  background: #fff3cd;
+
+  outline: 5px solid #ff9800;
+  outline-offset: -5px;
+
+  transform: scale(1.03);
+}
+
+.cell.start-position img {
+  transform: scale(1.05);
+}
+
+/* -------------------- NYILAK MOBILON -------------------- */
+
+@media (max-width: 700px) {
+  .arrow-task-card {
+    width: 98vw;
+    min-height: 100px;
+    padding: 10px 6px;
+  }
+
+  .arrow-task-row {
+    gap: 5px;
+  }
+
+  .arrow-start-animal {
+    width: 11vw;
+    height: 11vw;
+    max-width: 58px;
+    max-height: 58px;
+  }
+
+  .arrow-sequence {
+    gap: 3px;
+  }
+
+  .arrow-symbol {
+    min-width: 45px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f3e8ff;
+    border: 3px solid #9c27b0;
+    border-radius: 14px;
+
+    color: #6b1680;
+
+    font-family: Arial, sans-serif;
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 1;
+
+    text-shadow:
+      0.7px 0 currentColor,
+      -0.7px 0 currentColor,
+      0 0.7px currentColor,
+      0 -0.7px currentColor;
+
+    box-sizing: border-box;
+  }
+
+  .arrow-question {
+    min-width: 9vw;
+    width: 9vw;
+    height: 10vw;
+
+    max-width: 44px;
+    max-height: 48px;
+
+    border-width: 2px;
+    border-radius: 10px;
+
+    font-size: clamp(24px, 6.5vw, 34px);
+  }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Kövesd a nyilakat</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="game-page">
+
+<a
+  class="back-button"
+  href="index.html"
+  title="Vissza a játékokhoz"
+>
+  👈
+</a>
+
+<button
+  class="shuffle-button"
+  onclick="newBoard()"
+  title="Új pálya"
+>
+  🎲
+</button>
+
+<h1>➡️ Kövesd a nyilakat</h1>
+
+<div id="task"></div>
+
+<p id="message"></p>
+
+<div id="board"></div>
+
+<script src="common.js"></script>
+<script src="nyilak.js"></script>
+
+</body>
+</html>

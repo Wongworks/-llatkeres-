@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Állatos játékok</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -12,17 +14,18 @@
 <div class="container">
 
   <a
-  class="settings-button"
-  href="beallitasok.html"
-  title="Beállítások"
->
-  ⚙️
-</a>
+    class="settings-button"
+    href="beallitasok.html"
+    title="Beállítások"
+  >
+    ⚙️
+  </a>
 
   <h1>🐾 Állatos játékok</h1>
   <p class="subtitle">Válassz egy játékot!</p>
 
   <div class="menu">
+
     <button class="card green" onclick="openModeModal()">
       <div class="emoji">🎯</div>
       <div class="title">Keresd meg<br>az állatot</div>
@@ -33,12 +36,15 @@
       <div class="title">Kódvadász</div>
     </button>
 
-    <button class="card orange" onclick="location.href='kodolvaso.html'">
+    <button
+      class="card orange"
+      onclick="location.href='kodolvaso.html'"
+    >
       <div class="emoji">🗺️</div>
       <div class="title">Kódolvasó</div>
     </button>
 
-    <button class="card purple" disabled>
+    <button class="card purple" onclick="openArrowModal()">
       <div class="emoji">➡️</div>
       <div class="title">Kövesd a<br>nyilakat!</div>
     </button>
@@ -52,11 +58,15 @@
       <div class="emoji">🔊</div>
       <div class="title">Állathangok</div>
     </button>
+
   </div>
 </div>
 
+<!-- KERESD MEG AZ ÁLLATOT MÓDVÁLASZTÓ -->
+
 <div id="modeModal" class="modal">
   <div class="modal-box">
+
     <h2>🎯 Keresd meg az állatot</h2>
     <p>Melyik módban szeretnél játszani?</p>
 
@@ -70,31 +80,80 @@
       <span>szó alapján keresés</span>
     </button>
 
-    <button class="close-btn" onclick="closeModeModal()">Mégsem</button>
+    <button class="close-btn" onclick="closeModeModal()">
+      Mégsem
+    </button>
+
   </div>
 </div>
 
+<!-- KÓDVADÁSZ MÓDVÁLASZTÓ -->
+
 <div id="codeModal" class="modal">
   <div class="modal-box">
+
     <h2>🧭 Kódvadász</h2>
     <p>Melyik módban szeretnél játszani?</p>
 
-    <button class="mode-btn mano" onclick="startCodeGame('kodkereso')">
+    <button
+      class="mode-btn mano"
+      onclick="startCodeGame('kodkereso')"
+    >
       🌱 Kódkereső
       <span>egy kód alapján keresés</span>
     </button>
 
-    <button class="mode-btn olvaso" onclick="startCodeGame('kodfejto')">
+    <button
+      class="mode-btn olvaso"
+      onclick="startCodeGame('kodfejto')"
+    >
       🕵️ Kódfejtő
       <span>több kód követése</span>
     </button>
 
-    <button class="mode-btn kod-osveny" onclick="startCodeGame('kodosveny')">
+    <button
+      class="mode-btn kod-osveny"
+      onclick="startCodeGame('kodosveny')"
+    >
       🐍 Kódösvény
       <span>6–8 kód követése sorrendben</span>
     </button>
 
-    <button class="close-btn" onclick="closeCodeModal()">Mégsem</button>
+    <button class="close-btn" onclick="closeCodeModal()">
+      Mégsem
+    </button>
+
+  </div>
+</div>
+
+<!-- KÖVESD A NYILAKAT MÓDVÁLASZTÓ -->
+
+<div id="arrowModal" class="modal">
+  <div class="modal-box">
+
+    <h2>➡️ Kövesd a nyilakat</h2>
+    <p>Melyik ösvényen szeretnél elindulni?</p>
+
+    <button
+      class="mode-btn mano"
+      onclick="startArrowGame('egyenes')"
+    >
+      🌱 Egyenes ösvény
+      <span>csak fel, le, jobbra és balra</span>
+    </button>
+
+    <button
+      class="mode-btn olvaso"
+      onclick="startArrowGame('kalandos')"
+    >
+      ⭐ Kalandos ösvény
+      <span>átlós irányokkal is</span>
+    </button>
+
+    <button class="close-btn" onclick="closeArrowModal()">
+      Mégsem
+    </button>
+
   </div>
 </div>
 
@@ -124,6 +183,20 @@ function startCodeGame(mode) {
   localStorage.setItem("codeGameMode", mode);
   location.href = "kodvadasz.html";
 }
+
+function openArrowModal() {
+  document.getElementById("arrowModal").style.display = "flex";
+}
+
+function closeArrowModal() {
+  document.getElementById("arrowModal").style.display = "none";
+}
+
+function startArrowGame(mode) {
+  localStorage.setItem("arrowGameMode", mode);
+  location.href = "nyilak.html";
+}
 </script>
+
 </body>
 </html>
