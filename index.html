@@ -1,85 +1,129 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-<meta charset="UTF-8">
-<title>Állatkereső</title>
-
-<style>
-#board {
-  display: grid;
-  grid-template-columns: repeat(6, 80px);
-  grid-auto-rows: 80px;
-  gap: 6px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.header {
-  width: 80px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  background: #eee;
-  border: 2px solid #333;
-}
-
-body {
-  font-family: Arial;
-  background: #fff6d6;
-  text-align: center;
-}
-.cell {
-  width: 80px;
-  height: 80px;
-  border: 2px solid #333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 30px;
-  background: white;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-/* HELYES */
-.correct {
-  background: #4CAF50 !important;
-  color: white !important;
-  transform: scale(1.2);
-  box-shadow: 0 0 10px rgba(0,255,0,0.5);
-}
-
-/* HIBÁS */
-.wrong {
-  background: #f44336 !important;
-  color: white !important;
-  animation: shake 0.3s;
-}
-
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
-}
-h1, h2, p {
-  text-align: center;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Állatos játékok</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>🐾 Állatkereső</h1>
+<div class="container">
 
-<h2 id="task"></h2>
-<p id="message"></p>
+  <a
+  class="settings-button"
+  href="beallitasok.html"
+  title="Beállítások"
+>
+  ⚙️
+</a>
 
-<div id="board"></div>
+  <h1>🐾 Állatos játékok</h1>
+  <p class="subtitle">Válassz egy játékot!</p>
 
-<script src="script.js"></script>
+  <div class="menu">
+    <button class="card green" onclick="openModeModal()">
+      <div class="emoji">🎯</div>
+      <div class="title">Keresd meg<br>az állatot</div>
+    </button>
 
+    <button class="card blue" onclick="openCodeModal()">
+      <div class="emoji">🧭</div>
+      <div class="title">Kódvadász</div>
+    </button>
+
+    <button class="card orange" disabled>
+      <div class="emoji">🗺️</div>
+      <div class="title">Mi a<br>koordinátája?</div>
+    </button>
+
+    <button class="card purple" disabled>
+      <div class="emoji">➡️</div>
+      <div class="title">Kövesd a<br>nyilakat!</div>
+    </button>
+
+    <button class="card red" disabled>
+      <div class="emoji">✔️</div>
+      <div class="title">Igaz vagy<br>hamis?</div>
+    </button>
+
+    <button class="card yellow" disabled>
+      <div class="emoji">🔊</div>
+      <div class="title">Állathangok</div>
+    </button>
+  </div>
+</div>
+
+<div id="modeModal" class="modal">
+  <div class="modal-box">
+    <h2>🎯 Keresd meg az állatot</h2>
+    <p>Melyik módban szeretnél játszani?</p>
+
+    <button class="mode-btn mano" onclick="startGame('mano')">
+      🧸 Manó mód
+      <span>kép alapján keresés</span>
+    </button>
+
+    <button class="mode-btn olvaso" onclick="startGame('olvaso')">
+      📚 Olvasó mód
+      <span>szó alapján keresés</span>
+    </button>
+
+    <button class="close-btn" onclick="closeModeModal()">Mégsem</button>
+  </div>
+</div>
+
+<div id="codeModal" class="modal">
+  <div class="modal-box">
+    <h2>🧭 Kódvadász</h2>
+    <p>Melyik módban szeretnél játszani?</p>
+
+    <button class="mode-btn mano" onclick="startCodeGame('kodkereso')">
+      🌱 Kódkereső
+      <span>egy kód alapján keresés</span>
+    </button>
+
+    <button class="mode-btn olvaso" onclick="startCodeGame('kodfejto')">
+      🕵️ Kódfejtő
+      <span>több kód követése</span>
+    </button>
+
+    <button class="mode-btn kod-osveny" onclick="startCodeGame('kodosveny')">
+      🐍 Kódösvény
+      <span>6–8 kód követése sorrendben</span>
+    </button>
+
+    <button class="close-btn" onclick="closeCodeModal()">Mégsem</button>
+  </div>
+</div>
+
+<script>
+function openModeModal() {
+  document.getElementById("modeModal").style.display = "flex";
+}
+
+function closeModeModal() {
+  document.getElementById("modeModal").style.display = "none";
+}
+
+function startGame(mode) {
+  localStorage.setItem("animalGameMode", mode);
+  location.href = "keresd.html";
+}
+
+function openCodeModal() {
+  document.getElementById("codeModal").style.display = "flex";
+}
+
+function closeCodeModal() {
+  document.getElementById("codeModal").style.display = "none";
+}
+
+function startCodeGame(mode) {
+  localStorage.setItem("codeGameMode", mode);
+  location.href = "kodvadasz.html";
+}
+</script>
 </body>
 </html>

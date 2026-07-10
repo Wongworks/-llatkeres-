@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Beállítások</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="settings-page">
+
+<a
+  class="back-button"
+  href="index.html"
+  title="Vissza a játékokhoz"
+>
+  👈
+</a>
+
+<div class="settings-container">
+
+  <h1>⚙️ Beállítások</h1>
+
+  <div class="settings-card">
+
+    <div class="setting-row">
+      <div class="setting-text">
+        <strong>🔊 Hangok</strong>
+        <span>Helyes és hibás válasz hangja</span>
+      </div>
+
+      <label class="switch">
+        <input type="checkbox" id="soundSetting">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-text">
+        <strong>🎉 Jutalomkártya</strong>
+        <span>Időnként jelenjen meg jutalom</span>
+      </div>
+
+      <label class="switch">
+        <input type="checkbox" id="rewardSetting">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="setting-row reward-frequency-row">
+      <div class="setting-text">
+        <strong>🐾 Jutalom gyakorisága</strong>
+        <span>Hány sikeres feladat után jelenjen meg?</span>
+      </div>
+
+      <select id="rewardIntervalSetting">
+        <option value="5">5 feladat után</option>
+        <option value="10">10 feladat után</option>
+      </select>
+    </div>
+
+  </div>
+
+  <p id="settingsMessage" class="settings-message"></p>
+
+</div>
+
+<script src="beallitasok.js"></script>
+
+</body>
+</html>
