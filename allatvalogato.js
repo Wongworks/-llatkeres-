@@ -396,6 +396,8 @@ function handleCompletedTask() {
 
 /* ---------------- FELADATHANG ---------------- */
 
+/* ---------------- FELADATHANG ---------------- */
+
 function prepareTaskAudio() {
   stopTaskAudio();
 
@@ -473,40 +475,6 @@ function stopTaskAudio() {
   taskAudio.removeAttribute("src");
   taskAudio.load();
   taskAudio = null;
-}
-
-function unlockAndSpeakTask() {
-  if (!currentTask) {
-    return;
-  }
-
-  speechUnlocked = true;
-  playTaskAudio();
-}
-
-function playTaskAudio() {
-  if (!taskAudio) {
-    document.getElementById("message").innerText =
-      "⚠️ Ehhez a feladathoz még nincs hangfájl.";
-    return;
-  }
-
-  taskAudio.pause();
-  taskAudio.currentTime = 0;
-
-  taskAudio.play().catch(() => {
-    document.getElementById("message").innerText =
-      "Nyomd meg újra a hangszórót!";
-  });
-}
-
-function stopTaskAudio() {
-  if (!taskAudio) {
-    return;
-  }
-
-  taskAudio.pause();
-  taskAudio.currentTime = 0;
 }
 
 /* ---------------- JELÖLÉSEK TÖRLÉSE ---------------- */
