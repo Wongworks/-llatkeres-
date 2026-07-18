@@ -1,9 +1,6 @@
 let mode = "findAnimal";
 const gameMode = localStorage.getItem("animalGameMode") || "mano";
 
-const cols = ["A","B","C","D","E"];
-const rows = [1,2,3,4,5,6,7];
-
 let target = "";
 let correctCount = 0;
 

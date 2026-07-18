@@ -7,9 +7,11 @@
   <title>Állatos játékok</title>
 
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="icons.css">
 </head>
 
-<body>
+<body class="home-page">
 
 <div class="container">
 
@@ -21,67 +23,126 @@
     ⚙️
   </a>
 
-  <h1>🐾 Állatos játékok</h1>
-  <p class="subtitle">Válassz egy játékot!</p>
+ <div class="home-heading">
+
+  <div class="heading-animal heading-animal-left">
+    🦊
+  </div>
+
+  <div class="heading-text">
+    <div class="heading-paws">🐾 🐾 🐾</div>
+
+    <h1>Állati kalandok</h1>
+
+    <p class="subtitle">
+      Fedezd fel az állatok világát!
+    </p>
+  </div>
+
+  <div class="heading-animal heading-animal-right">
+    🐰
+  </div>
+
+</div>
 
   <div class="menu">
 
-    <button class="card green" onclick="openModeModal()">
-      <div class="emoji">🎯</div>
-      <div class="title">Keresd meg<br>az állatot</div>
-    </button>
+  <button class="card green" onclick="openModeModal()">
+    <div class="emoji">🔍🐶</div>
+    <div class="title">Keresd meg<br>az állatot</div>
+    <div class="card-hint">Nézd meg jól!</div>
+  </button>
 
-    <button class="card blue" onclick="openCodeModal()">
-      <div class="emoji">🧭</div>
-      <div class="title">Kódvadász</div>
-    </button>
+  <button class="card blue" onclick="openCodeModal()">
+    <div class="emoji">🧭🦁</div>
+    <div class="title">Kódvadász</div>
+    <div class="card-hint">Fejtsd meg a kódot!</div>
+  </button>
 
-    <button
-      class="card orange"
-      onclick="location.href='kodolvaso.html'"
-    >
-      <div class="emoji">🗺️</div>
-      <div class="title">Kódolvasó</div>
-    </button>
+  <button
+    class="card orange"
+    onclick="location.href='kodolvaso.html'"
+  >
+    <div class="emoji">🗺️🐱</div>
+    <div class="title">Kódolvasó</div>
+    <div class="card-hint">Találd meg a helyét!</div>
+  </button>
 
-    <button class="card purple" onclick="openArrowModal()">
-      <div class="emoji">➡️</div>
-      <div class="title">Kövesd a<br>nyilakat!</div>
-    </button>
+  <button class="card purple" onclick="openArrowModal()">
+    <div class="emoji">➡️🐰</div>
+    <div class="title">Kövesd a<br>nyilakat!</div>
+    <div class="card-hint">Merre vezet az út?</div>
+  </button>
 
-    <button class="card red" disabled>
-      <div class="emoji">✔️</div>
-      <div class="title">Igaz vagy<br>hamis?</div>
-    </button>
+  <button class="card red" onclick="openTruthModal()">
+    <div class="emoji">❓🐸</div>
+    <div class="title">Igaz vagy<br>hamis?</div>
+    <div class="card-hint">Gondold át alaposan!</div>
+  </button>
 
-    <button class="card yellow" disabled>
-      <div class="emoji">🔊</div>
-      <div class="title">Állathangok</div>
-    </button>
+  <button
+    class="card yellow"
+    onclick="location.href='allathangok.html'"
+  >
+    <div class="emoji">🔊🐓</div>
+    <div class="title">Állathangok</div>
+    <div class="card-hint">Ki lehet az?</div>
+  </button>
 
-  </div>
+  <button
+    class="card turquoise"
+    onclick="openSorterModal()"
+  >
+    <div class="emoji">🧺🐿️</div>
+    <div class="title">Állatválogató</div>
+    <div class="card-hint">Válogasd szét őket!</div>
+  </button>
+
 </div>
 
 <!-- KERESD MEG AZ ÁLLATOT MÓDVÁLASZTÓ -->
 
 <div id="modeModal" class="modal">
-  <div class="modal-box">
+  <div class="modal-box adventure-modal green-modal">
 
-    <h2>🎯 Keresd meg az állatot</h2>
-    <p>Melyik módban szeretnél játszani?</p>
+    <div class="modal-decoration modal-decoration-left">🌿</div>
+    <div class="modal-decoration modal-decoration-right">🐾</div>
 
-    <button class="mode-btn mano" onclick="startGame('mano')">
-      🧸 Manó mód
-      <span>kép alapján keresés</span>
+    <div class="modal-mascot">🦊</div>
+
+    <h2>Keresd meg az állatot</h2>
+    <p class="modal-question">Melyik kalandot választod?</p>
+
+    <button
+      class="mode-btn mano"
+      onclick="startGame('mano')"
+    >
+      <span class="mode-icon">🧸</span>
+
+      <span class="mode-content">
+        <strong>Manó mód</strong>
+        <small>Kép alapján keresés</small>
+      </span>
+
+      <span class="mode-arrow">➜</span>
     </button>
 
-    <button class="mode-btn olvaso" onclick="startGame('olvaso')">
-      📚 Olvasó mód
-      <span>szó alapján keresés</span>
+    <button
+      class="mode-btn olvaso"
+      onclick="startGame('olvaso')"
+    >
+      <span class="mode-icon">📚</span>
+
+      <span class="mode-content">
+        <strong>Olvasó mód</strong>
+        <small>Szó alapján keresés</small>
+      </span>
+
+      <span class="mode-arrow">➜</span>
     </button>
 
     <button class="close-btn" onclick="closeModeModal()">
-      Mégsem
+      🌿 Mégsem
     </button>
 
   </div>
@@ -89,38 +150,63 @@
 
 <!-- KÓDVADÁSZ MÓDVÁLASZTÓ -->
 
-<div id="codeModal" class="modal">
-  <div class="modal-box">
+<!-- KÓDVADÁSZ MÓDVÁLASZTÓ -->
 
-    <h2>🧭 Kódvadász</h2>
-    <p>Melyik módban szeretnél játszani?</p>
+<div id="codeModal" class="modal">
+  <div class="modal-box adventure-modal blue-modal">
+
+    <div class="modal-decoration modal-decoration-left">🔐</div>
+    <div class="modal-decoration modal-decoration-right">🐾</div>
+
+    <div class="modal-mascot">🦝</div>
+
+    <h2>Kódvadász</h2>
+    <p class="modal-question">Melyik küldetést választod?</p>
 
     <button
       class="mode-btn mano"
       onclick="startCodeGame('kodkereso')"
     >
-      🌱 Kódkereső
-      <span>egy kód alapján keresés</span>
+      <span class="mode-icon">🌱</span>
+
+      <span class="mode-content">
+        <strong>Kódkereső</strong>
+        <small>Egy kód alapján keresés</small>
+      </span>
+
+      <span class="mode-arrow">➜</span>
     </button>
 
     <button
       class="mode-btn olvaso"
       onclick="startCodeGame('kodfejto')"
     >
-      🕵️ Kódfejtő
-      <span>több kód követése</span>
+      <span class="mode-icon">🕵️</span>
+
+      <span class="mode-content">
+        <strong>Kódfejtő</strong>
+        <small>Több kód megfejtése</small>
+      </span>
+
+      <span class="mode-arrow">➜</span>
     </button>
 
     <button
       class="mode-btn kod-osveny"
       onclick="startCodeGame('kodosveny')"
     >
-      🐍 Kódösvény
-      <span>6–8 kód követése sorrendben</span>
+      <span class="mode-icon">🐍</span>
+
+      <span class="mode-content">
+        <strong>Kódösvény</strong>
+        <small>6–8 kód követése sorrendben</small>
+      </span>
+
+      <span class="mode-arrow">➜</span>
     </button>
 
     <button class="close-btn" onclick="closeCodeModal()">
-      Mégsem
+      💧 Mégsem
     </button>
 
   </div>
@@ -128,30 +214,149 @@
 
 <!-- KÖVESD A NYILAKAT MÓDVÁLASZTÓ -->
 
-<div id="arrowModal" class="modal">
-  <div class="modal-box">
+<!-- KÖVESD A NYILAKAT MÓDVÁLASZTÓ -->
 
-    <h2>➡️ Kövesd a nyilakat</h2>
-    <p>Melyik ösvényen szeretnél elindulni?</p>
+<div id="arrowModal" class="modal">
+  <div class="modal-box adventure-modal purple-modal">
+
+    <div class="modal-decoration modal-decoration-left">🍂</div>
+    <div class="modal-decoration modal-decoration-right">⭐</div>
+
+    <div class="modal-mascot">🐿️</div>
+
+    <h2>Kövesd a nyilakat</h2>
+    <p class="modal-question">Melyik ösvényen indulsz el?</p>
 
     <button
       class="mode-btn mano"
       onclick="startArrowGame('egyenes')"
     >
-      🌱 Egyenes ösvény
-      <span>csak fel, le, jobbra és balra</span>
+      <span class="mode-icon">🌱</span>
+
+      <span class="mode-content">
+        <strong>Egyenes ösvény</strong>
+        <small>Fel, le, jobbra és balra</small>
+      </span>
+
+      <span class="mode-arrow">➜</span>
     </button>
 
     <button
       class="mode-btn olvaso"
       onclick="startArrowGame('kalandos')"
     >
-      ⭐ Kalandos ösvény
-      <span>átlós irányokkal is</span>
+      <span class="mode-icon">⭐</span>
+
+      <span class="mode-content">
+        <strong>Kalandos ösvény</strong>
+        <small>Átlós irányokkal is</small>
+      </span>
+
+      <span class="mode-arrow">➜</span>
     </button>
 
     <button class="close-btn" onclick="closeArrowModal()">
-      Mégsem
+      🍂 Mégsem
+    </button>
+
+  </div>
+</div>
+
+<!-- IGAZ VAGY HAMIS MÓDVÁLASZTÓ -->
+
+<!-- IGAZ VAGY HAMIS MÓDVÁLASZTÓ -->
+
+<div id="truthModal" class="modal">
+  <div class="modal-box adventure-modal red-modal">
+
+    <div class="modal-decoration modal-decoration-left">❓</div>
+    <div class="modal-decoration modal-decoration-right">💭</div>
+
+    <div class="modal-mascot">🐼</div>
+
+    <h2>Igaz vagy hamis?</h2>
+    <p class="modal-question">Melyik nyomozást választod?</p>
+
+    <button
+      class="mode-btn mano"
+      onclick="startTruthGame('allatnyomozo')"
+    >
+      <span class="mode-icon">🧸</span>
+
+      <span class="mode-content">
+        <strong>Állatnyomozó</strong>
+        <small>Egyszerűbb állítások</small>
+      </span>
+
+      <span class="mode-arrow">➜</span>
+    </button>
+
+    <button
+      class="mode-btn olvaso"
+      onclick="startTruthGame('mesternyomozo')"
+    >
+      <span class="mode-icon">🔎</span>
+
+      <span class="mode-content">
+        <strong>Mesternyomozó</strong>
+        <small>Összetettebb állítások</small>
+      </span>
+
+      <span class="mode-arrow">➜</span>
+    </button>
+
+    <button class="close-btn" onclick="closeTruthModal()">
+      ❓ Mégsem
+    </button>
+
+  </div>
+</div>
+
+<!-- ÁLLATVÁLOGATÓ MÓDVÁLASZTÓ -->
+
+<!-- ÁLLATVÁLOGATÓ MÓDVÁLASZTÓ -->
+
+<div id="sorterModal" class="modal">
+  <div class="modal-box adventure-modal turquoise-modal">
+
+    <div class="modal-decoration modal-decoration-left">🧺</div>
+    <div class="modal-decoration modal-decoration-right">✨</div>
+
+    <div class="modal-mascot">🐻</div>
+
+    <h2>Állatválogató</h2>
+    <p class="modal-question">Melyik válogatást választod?</p>
+
+    <button
+      class="mode-btn mano"
+      onclick="startSorterGame('konnyu')"
+    >
+      <span class="mode-icon">🧸</span>
+
+      <span class="mode-content">
+        <strong>Könnyű válogatás</strong>
+        <small>Jól megfigyelhető tulajdonságok</small>
+      </span>
+
+      <span class="mode-arrow">➜</span>
+    </button>
+
+    <button
+      class="mode-btn olvaso"
+      onclick="startSorterGame('szakerto')"
+    >
+      <span class="mode-icon">🔬</span>
+
+      <span class="mode-content">
+        <strong>Állatszakértő</strong>
+        <small>Állatcsoportok és állattani fogalmak</small>
+      </span>
+
+      <span class="mode-arrow">➜</span>
+    </button>
+
+    <button class="close-btn" onclick="closeSorterModal()">
+      ✨ Mégsem
     </button>
 
   </div>
@@ -195,6 +400,34 @@ function closeArrowModal() {
 function startArrowGame(mode) {
   localStorage.setItem("arrowGameMode", mode);
   location.href = "nyilak.html";
+}
+function openTruthModal() {
+  document.getElementById("truthModal").style.display =
+    "flex";
+}
+
+function closeTruthModal() {
+  document.getElementById("truthModal").style.display =
+    "none";
+}
+
+function startTruthGame(mode) {
+  localStorage.setItem("truthGameMode", mode);
+  location.href = "igazhamis.html";
+}
+function openSorterModal() {
+  document.getElementById("sorterModal").style.display =
+    "flex";
+}
+
+function closeSorterModal() {
+  document.getElementById("sorterModal").style.display =
+    "none";
+}
+
+function startSorterGame(mode) {
+  localStorage.setItem("sortingGameMode", mode);
+  location.href = "allatvalogato.html";
 }
 </script>
 

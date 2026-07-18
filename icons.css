@@ -1,0 +1,193 @@
+/* =========================================================
+   ÁLLATOS JÁTÉKOK – KÖZÖS SVG IKONSTÍLUSOK
+   UI 2.0
+   ========================================================= */
+
+/* -------------------- ALAP SVG-BEÁLLÍTÁS -------------------- */
+
+[data-icon] svg {
+  display: block;
+  flex: 0 0 auto;
+}
+
+/* -------------------- FELSŐ VEZÉRLŐGOMBOK -------------------- */
+
+.topbar-icon {
+  width: 31px;
+  height: 31px;
+
+  display: block;
+
+  color: inherit;
+
+  pointer-events: none;
+}
+
+.shuffle-icon {
+  width: 34px;
+  height: 34px;
+}
+
+/* -------------------- JÁTÉK FEJLÉCIKON -------------------- */
+
+.game-title-mascot {
+  color: var(--game-dark);
+}
+
+.game-header-icon {
+  width: 39px;
+  height: 39px;
+
+  display: block;
+
+  color: inherit;
+
+  pointer-events: none;
+}
+
+/* -------------------- BEÁLLÍTÁSOK IKON -------------------- */
+
+.settings-icon {
+  width: 29px;
+  height: 29px;
+
+  display: block;
+
+  color: inherit;
+
+  pointer-events: none;
+}
+
+/* -------------------- FELADATGOMBOK IKONJAI -------------------- */
+
+.action-icon {
+  width: 31px;
+  height: 31px;
+
+  display: block;
+
+  color: inherit;
+
+  pointer-events: none;
+}
+
+/* -------------------- JÁTÉKONKÉNTI FEJLÉCIKON-SZÍNEK -------------------- */
+
+.search-game .game-title-mascot {
+  color: var(--game-dark, #3f9148);
+}
+
+.code-game .game-title-mascot {
+  color: var(--game-dark, #2d6fd8);
+}
+
+.coordinate-game .game-title-mascot {
+  color: var(--game-dark, #d68910);
+}
+
+.arrow-game .game-title-mascot {
+  color: var(--game-dark, #6d348b);
+}
+
+.truth-game .game-title-mascot {
+  color: var(--game-dark, #c0392b);
+}
+
+.sound-game .game-title-mascot {
+  color: var(--game-dark, #d68910);
+}
+
+.sorter-game .game-title-mascot {
+  color: var(--game-dark, #0e8d80);
+}
+
+/* -------------------- IKONMOZGÁS -------------------- */
+
+.topbar-button:hover .topbar-icon {
+  transform: scale(1.05);
+}
+
+.game-title-mascot:hover .game-header-icon {
+  transform: scale(1.04);
+}
+
+/* -------------------- ÁTMENETEK -------------------- */
+
+.topbar-icon,
+.game-header-icon,
+.settings-icon,
+.action-icon {
+  transition:
+    transform 0.16s ease,
+    color 0.16s ease;
+}
+
+/* =========================================================
+   TABLET ÉS MOBIL
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .topbar-icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  .shuffle-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .game-header-icon {
+    width: 31px;
+    height: 31px;
+  }
+
+  .settings-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .action-icon {
+    width: 27px;
+    height: 27px;
+  }
+}
+
+/* =========================================================
+   NAGYON KESKENY MOBIL
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .topbar-icon {
+    width: 23px;
+    height: 23px;
+  }
+
+  .shuffle-icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  .game-header-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .action-icon {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+/* =========================================================
+   MOZGÁSCSÖKKENTÉS
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .topbar-icon,
+  .game-header-icon,
+  .settings-icon,
+  .action-icon {
+    transition: none;
+  }
+}

@@ -2,11 +2,6 @@
 
 const gameMode = localStorage.getItem("codeGameMode") || "kodkereso";
 
-/* ---------------- RÁCS ---------------- */
-
-const cols = ["A", "B", "C", "D", "E"];
-const rows = [1, 2, 3, 4, 5, 6, 7];
-
 /* ---------------- ÁLLAPOT ---------------- */
 
 let target = "";
@@ -184,10 +179,10 @@ function checkCodeFinder(cell, key) {
     cell.classList.add("correct");
     document.getElementById("message").innerText = "🎉 Helyes!";
 
-    if (correctCount % 5 === 0) {
-      showRewardCard();
-      return;
-    }
+  if (shouldShowReward()) {
+  showRewardCard();
+  return;
+}
 
     setTimeout(() => {
       newTask();

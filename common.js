@@ -47,6 +47,9 @@ const originalGrid = {
   E1:"kigyo", E2:"teknos", E3:"vizilo", E4:"polip", E5:"kacsa", E6:"zebra", E7:"flamingo"
 };
 
+const cols = ["A", "B", "C", "D", "E"];
+const rows = [1, 2, 3, 4, 5, 6, 7];
+
 let grid = {};
 
 function shuffleGrid() {
@@ -155,4 +158,706 @@ function shouldShowReward() {
   const rewardInterval = getRewardInterval();
 
   return correctCount % rewardInterval === 0;
+}
+/* ---------------- ÁLLATKATEGÓRIÁK ---------------- */
+
+const animalCategories = {
+  lo: [
+    "haziallat",
+    "bundas",
+    "negylabu",
+    "emlos",
+    "gerinces"
+  ],
+
+  kutya: [
+    "haziallat",
+    "bundas",
+    "negylabu",
+    "emlos",
+    "gerinces"
+  ],
+
+  oroszlan: [
+    "bundas",
+    "negylabu",
+    "vadallat",
+    "emlos",
+    "gerinces"
+  ],
+
+  beka: [
+    "negylabu",
+    "vizhezKotott",
+    "tojastRak",
+    "keteltu",
+    "gerinces"
+  ],
+
+  teve: [
+    "bundas",
+    "negylabu",
+    "vadallat",
+    "emlos",
+    "gerinces"
+  ],
+
+  szarvas: [
+    "bundas",
+    "negylabu",
+    "vadallat",
+    "emlos",
+    "gerinces",
+    "szarvaVan"
+  ],
+
+  csiga: [
+    "labNelkuli",
+    "tojastRak",
+    "gerinctelen"
+  ],
+
+  eger: [
+    "bundas",
+    "negylabu",
+    "vadallat",
+    "emlos",
+    "gerinces"
+  ],
+
+  tehen: [
+    "haziallat",
+    "bundas",
+    "negylabu",
+    "emlos",
+    "gerinces",
+    "szarvaVan"
+  ],
+
+  balna: [
+    "vizbenEl",
+    "labNelkuli",
+    "vadallat",
+    "emlos",
+    "gerinces",
+    "viziEmlos"
+  ],
+
+  zsiraf: [
+    "bundas",
+    "negylabu",
+    "vadallat",
+    "emlos",
+    "gerinces",
+    "szarvaVan"
+  ],
+
+  elefant: [
+    "negylabu",
+    "vadallat",
+    "emlos",
+    "gerinces"
+  ],
+
+  rak: [
+    "vizhezKotott",
+    "tojastRak",
+    "gerinctelen"
+  ],
+
+  gyik: [
+    "negylabu",
+    "tojastRak",
+    "vadallat",
+    "hullo",
+    "gerinces"
+  ],
+
+  roka: [
+    "bundas",
+    "negylabu",
+    "vadallat",
+    "emlos",
+    "gerinces"
+  ],
+
+  delfin: [
+    "vizbenEl",
+    "labNelkuli",
+    "vadallat",
+    "emlos",
+    "gerinces",
+    "viziEmlos"
+  ],
+
+  kecske: [
+    "haziallat",
+    "bundas",
+    "negylabu",
+    "emlos",
+    "gerinces",
+    "szarvaVan"
+  ],
+
+  kakas: [
+    "haziallat",
+    "madar",
+    "tollas",
+    "ketlabu",
+    "tojastRak",
+    "gerinces"
+  ],
+
+  mokus: [
+    "bundas",
+    "negylabu",
+    "vadallat",
+    "emlos",
+    "gerinces"
+  ],
+
+  majom: [
+    "bundas",
+    "negylabu",
+    "vadallat",
+    "emlos",
+    "gerinces"
+  ],
+
+  pava: [
+    "madar",
+    "tollas",
+    "ketlabu",
+    "tojastRak",
+    "vadallat",
+    "gerinces",
+    "repul"
+  ],
+
+  barany: [
+    "haziallat",
+    "bundas",
+    "negylabu",
+    "emlos",
+    "gerinces"
+  ],
+
+  macska: [
+    "haziallat",
+    "bundas",
+    "negylabu",
+    "emlos",
+    "gerinces"
+  ],
+
+  krokodil: [
+    "negylabu",
+    "vizhezKotott",
+    "tojastRak",
+    "vadallat",
+    "hullo",
+    "gerinces"
+  ],
+
+  nyul: [
+    "bundas",
+    "negylabu",
+    "vadallat",
+    "emlos",
+    "gerinces"
+  ],
+
+  hal: [
+    "vizbenEl",
+    "labNelkuli",
+    "tojastRak",
+    "gerinces"
+  ],
+
+  pingvin: [
+    "madar",
+    "tollas",
+    "ketlabu",
+    "vizhezKotott",
+    "tojastRak",
+    "vadallat",
+    "gerinces"
+  ],
+
+  foka: [
+    "bundas",
+    "vizhezKotott",
+    "vadallat",
+    "emlos",
+    "gerinces",
+    "viziEmlos"
+  ],
+
+  kigyo: [
+    "labNelkuli",
+    "tojastRak",
+    "vadallat",
+    "hullo",
+    "gerinces"
+  ],
+
+  teknos: [
+    "negylabu",
+    "vizhezKotott",
+    "tojastRak",
+    "vadallat",
+    "hullo",
+    "gerinces"
+  ],
+
+  vizilo: [
+    "negylabu",
+    "vizhezKotott",
+    "vadallat",
+    "emlos",
+    "gerinces"
+  ],
+
+  polip: [
+    "vizbenEl",
+    "labNelkuli",
+    "tojastRak",
+    "vadallat",
+    "gerinctelen"
+  ],
+
+  kacsa: [
+    "haziallat",
+    "madar",
+    "tollas",
+    "ketlabu",
+    "vizhezKotott",
+    "tojastRak",
+    "gerinces",
+    "repul"
+  ],
+
+  zebra: [
+    "bundas",
+    "negylabu",
+    "vadallat",
+    "emlos",
+    "gerinces",
+    "csikos"
+  ],
+
+  flamingo: [
+    "madar",
+    "tollas",
+    "ketlabu",
+    "vizhezKotott",
+    "tojastRak",
+    "vadallat",
+    "gerinces",
+    "repul"
+  ]
+};
+
+/* ---------------- KATEGÓRIÁK ADATAI ---------------- */
+
+const categoryDefinitions = {
+  haziallat: {
+    name: "háziállat"
+  },
+
+  bundas: {
+    name: "bundás állat"
+  },
+
+  tollas: {
+    name: "tollas állat"
+  },
+
+  negylabu: {
+    name: "négylábú állat"
+  },
+
+  ketlabu: {
+    name: "kétlábú állat"
+  },
+
+  labNelkuli: {
+    name: "láb nélküli állat"
+  },
+
+  vizbenEl: {
+    name: "vízben élő állat"
+  },
+
+  vizhezKotott: {
+    name: "vízhez kötötten élő állat"
+  },
+
+  madar: {
+    name: "madár"
+  },
+
+  tojastRak: {
+    name: "tojást rakó állat"
+  },
+
+  vadallat: {
+    name: "vadállat"
+  },
+
+  repul: {
+    name: "repülni tudó állat"
+  },
+
+  csikos: {
+    name: "csíkos állat"
+  },
+
+  szarvaVan: {
+    name: "szarvval vagy aganccsal rendelkező állat"
+  },
+
+  emlos: {
+    name: "emlős"
+  },
+
+  hullo: {
+    name: "hüllő"
+  },
+
+  keteltu: {
+    name: "kétéltű"
+  },
+
+  gerinces: {
+    name: "gerinces állat"
+  },
+
+  gerinctelen: {
+    name: "gerinctelen állat"
+  },
+
+  viziEmlos: {
+    name: "vízi emlős"
+  }
+};
+
+/* ---------------- ÁLLATVÁLOGATÓ FELADATOK ---------------- */
+
+const categoryTasks = [
+  /* ---------------- KÖNNYŰ VÁLOGATÁS ---------------- */
+
+  {
+    mode: "konnyu",
+    category: "haziallat",
+    count: 3,
+    displayText: "Keress 3 háziállatot!",
+    speechText: "Keress három háziállatot!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "haziallat",
+    count: 5,
+    displayText: "Jelölj meg 5 háziállatot!",
+    speechText: "Jelölj meg öt háziállatot!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "bundas",
+    count: 4,
+    displayText: "Válassz ki 4 bundás állatot!",
+    speechText: "Válassz ki négy bundás állatot!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "bundas",
+    count: 6,
+    displayText: "Találj 6 olyan állatot, amelynek bundája van!",
+    speechText: "Találj hat olyan állatot, amelynek bundája van!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "tollas",
+    count: 3,
+    displayText: "Keress 3 tollas állatot!",
+    speechText: "Keress három tollas állatot!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "tollas",
+    count: 4,
+    displayText: "Jelölj meg 4 olyan állatot, amelynek tolla van!",
+    speechText: "Jelölj meg négy olyan állatot, amelynek tolla van!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "negylabu",
+    count: 4,
+    displayText: "Keress 4 négylábú állatot!",
+    speechText: "Keress négy négylábú állatot!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "negylabu",
+    count: 6,
+    displayText: "Válassz ki 6 állatot, amelynek négy lába van!",
+    speechText: "Válassz ki hat állatot, amelynek négy lába van!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "ketlabu",
+    count: 3,
+    displayText: "Találj 3 kétlábú állatot!",
+    speechText: "Találj három kétlábú állatot!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "ketlabu",
+    count: 4,
+    displayText: "Keress 4 állatot, amelynek két lába van!",
+    speechText: "Keress négy állatot, amelynek két lába van!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "labNelkuli",
+    count: 3,
+    displayText: "Keress 3 láb nélküli állatot!",
+    speechText: "Keress három láb nélküli állatot!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "labNelkuli",
+    count: 4,
+    displayText: "Jelölj meg 4 állatot, amelynek nincs lába!",
+    speechText: "Jelölj meg négy állatot, amelynek nincs lába!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "vizbenEl",
+    count: 3,
+    displayText: "Találj 3 vízben élő állatot!",
+    speechText: "Találj három vízben élő állatot!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "vizbenEl",
+    count: 4,
+    displayText: "Keress 4 olyan állatot, amely a vízben él!",
+    speechText: "Keress négy olyan állatot, amely a vízben él!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "vizhezKotott",
+    count: 4,
+    displayText: "Jelölj meg 4 vízhez kötötten élő állatot!",
+    speechText: "Jelölj meg négy vízhez kötötten élő állatot!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "vizhezKotott",
+    count: 5,
+    displayText: "Keress 5 állatot, amely sok időt tölt a víz közelében!",
+    speechText: "Keress öt állatot, amely sok időt tölt a víz közelében!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "tojastRak",
+    count: 4,
+    displayText: "Keress 4 tojást rakó állatot!",
+    speechText: "Keress négy tojást rakó állatot!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "tojastRak",
+    count: 6,
+    displayText: "Találj 6 olyan állatot, amely tojást rak!",
+    speechText: "Találj hat olyan állatot, amely tojást rak!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "vadallat",
+    count: 4,
+    displayText: "Jelölj meg 4 vadállatot!",
+    speechText: "Jelölj meg négy vadállatot!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "vadallat",
+    count: 6,
+    displayText: "Válassz ki 6 vadon élő állatot!",
+    speechText: "Válassz ki hat vadon élő állatot!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "repul",
+    count: 2,
+    displayText: "Keress 2 olyan állatot, amely tud repülni!",
+    speechText: "Keress két olyan állatot, amely tud repülni!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "szarvaVan",
+    count: 3,
+    displayText: "Keress 3 állatot, amelynek szarva vagy agancsa van!",
+    speechText: "Keress három állatot, amelynek szarva vagy agancsa van!"
+  },
+
+  {
+    mode: "konnyu",
+    category: "csikos",
+    count: 1,
+    displayText: "Keresd meg a csíkos állatot!",
+    speechText: "Keresd meg a csíkos állatot!"
+  },
+
+  /* ---------------- ÁLLATSZAKÉRTŐ ---------------- */
+
+  {
+    mode: "szakerto",
+    category: "emlos",
+    count: 4,
+    displayText: "Keress 4 emlős állatot!",
+    speechText: "Keress négy emlős állatot!"
+  },
+
+  {
+    mode: "szakerto",
+    category: "emlos",
+    count: 6,
+    displayText: "Jelölj meg 6 emlősállatot!",
+    speechText: "Jelölj meg hat emlősállatot!"
+  },
+
+  {
+    mode: "szakerto",
+    category: "madar",
+    count: 3,
+    displayText: "Válassz ki 3 madarat!",
+    speechText: "Válassz ki három madarat!"
+  },
+
+  {
+    mode: "szakerto",
+    category: "madar",
+    count: 5,
+    displayText: "Keresd meg mind az 5 madarat!",
+    speechText: "Keresd meg mind az öt madarat!"
+  },
+
+  {
+    mode: "szakerto",
+    category: "hullo",
+    count: 2,
+    displayText: "Keress 2 hüllőt!",
+    speechText: "Keress két hüllőt!"
+  },
+
+  {
+    mode: "szakerto",
+    category: "hullo",
+    count: 4,
+    displayText: "Keresd meg mind a 4 hüllőt!",
+    speechText: "Keresd meg mind a négy hüllőt!"
+  },
+
+  {
+    mode: "szakerto",
+    category: "keteltu",
+    count: 1,
+    displayText: "Keresd meg a kétéltű állatot!",
+    speechText: "Keresd meg a kétéltű állatot!"
+  },
+
+  {
+    mode: "szakerto",
+    category: "gerinces",
+    count: 5,
+    displayText: "Keress 5 gerinces állatot!",
+    speechText: "Keress öt gerinces állatot!"
+  },
+
+  {
+    mode: "szakerto",
+    category: "gerinces",
+    count: 7,
+    displayText: "Jelölj meg 7 gerinces állatot!",
+    speechText: "Jelölj meg hét gerinces állatot!"
+  },
+
+  {
+    mode: "szakerto",
+    category: "gerinctelen",
+    count: 2,
+    displayText: "Keress 2 gerinctelen állatot!",
+    speechText: "Keress két gerinctelen állatot!"
+  },
+
+  {
+    mode: "szakerto",
+    category: "gerinctelen",
+    count: 3,
+    displayText: "Keresd meg mind a 3 gerinctelen állatot!",
+    speechText: "Keresd meg mind a három gerinctelen állatot!"
+  },
+
+  {
+    mode: "szakerto",
+    category: "vízhez kötődő emlős",
+    count: 2,
+    displayText: "Keress 2 vízi emlőst!",
+    speechText: "Keress két vízi emlőst!"
+  },
+
+  {
+    mode: "szakerto",
+    category: "vízhez kötődő emlős",
+    count: 3,
+    displayText: "Keresd meg mind a 3 vízhez kötődő emlőst!",
+    speechText: "Keresd meg mind a három vízhez kötődő emlőst!"
+  },
+
+  {
+    mode: "szakerto",
+    category: "tojastRak",
+    count: 5,
+    displayText: "Keress 5 tojást rakó állatot!",
+    speechText: "Keress öt tojást rakó állatot!"
+  },
+
+  {
+    mode: "szakerto",
+    category: "vizbenEl",
+    count: 4,
+    displayText: "Válassz ki 4 vízben élő állatot!",
+    speechText: "Válassz ki négy vízben élő állatot!"
+  }
+];
+
+/* ---------------- KATEGÓRIA SEGÉDFÜGGVÉNY ---------------- */
+
+function getAnimalsByCategory(categoryId) {
+  return Object.keys(animalCategories).filter(animalId => {
+    return animalCategories[animalId].includes(categoryId);
+  });
 }

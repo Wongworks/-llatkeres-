@@ -3,22 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Kódvadász</title>
+
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="icons.css">
 </head>
 
-<body class="game-page">
+<body class="game-page code-game">
 
-<a class="back-button" href="index.html" title="Vissza a játékokhoz">👈</a>
-<button class="shuffle-button" onclick="newBoard()" title="Új pálya">🎲</button>
+<header class="game-topbar">
 
-<h1>🧭 Kódvadász</h1>
+  <a
+    class="topbar-button topbar-back"
+    href="index.html"
+    title="Vissza a játékokhoz"
+    aria-label="Vissza a játékokhoz"
+    data-icon="back"
+  ></a>
+
+  <div class="game-title-panel">
+
+    <div
+      class="game-title-mascot"
+      data-icon="codeGrid"
+      aria-hidden="true"
+    ></div>
+
+    <div class="game-title-text">
+      <h1>Kódvadász</h1>
+      <p>Fejtsd meg a kódot!</p>
+    </div>
+
+  </div>
+
+  <button
+    class="topbar-button topbar-shuffle"
+    onclick="newBoard()"
+    title="Új pálya"
+    aria-label="Új pálya"
+    data-icon="shuffle"
+  ></button>
+
+</header>
 
 <div id="task"></div>
+
 <p id="message"></p>
 
-<div id="board"></div>
+<div class="board-shell">
+  <div id="board"></div>
+</div>
 
+<script src="icons.js"></script>
 <script src="common.js"></script>
 <script src="kodvadasz.js"></script>
 

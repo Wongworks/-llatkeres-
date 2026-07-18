@@ -1,0 +1,67 @@
+/* =========================================================
+   ÁLLATOS JÁTÉKOK – KÖZÖS TÉMARENDSZER
+   UI 2.0
+   ========================================================= */
+
+/* -------------------- ÁLLATKERESŐ -------------------- */
+
+.search-game {
+  --game-main: #4caf50;
+  --game-dark: #287c31;
+  --game-light: #eaf8eb;
+  --game-soft: #d7f2da;
+}
+
+/* -------------------- KÓDVADÁSZ -------------------- */
+
+.code-game {
+  --game-main: #2196f3;
+  --game-dark: #1565c0;
+  --game-light: #e8f4ff;
+  --game-soft: #d5ebff;
+}
+
+/* -------------------- KÓDOLVASÓ -------------------- */
+
+.coordinate-game {
+  --game-main: #ff9800;
+  --game-dark: #c66a00;
+  --game-light: #fff4e4;
+  --game-soft: #ffe5bd;
+}
+
+/* -------------------- KÖVESD A NYILAKAT -------------------- */
+
+.arrow-game {
+  --game-main: #9c27b0;
+  --game-dark: #701b80;
+  --game-light: #f8eafa;
+  --game-soft: #efd6f3;
+}
+
+/* -------------------- IGAZ VAGY HAMIS -------------------- */
+
+.truth-game {
+  --game-main: #f44336;
+  --game-dark: #bd2c24;
+  --game-light: #ffedeb;
+  --game-soft: #ffd9d5;
+}
+
+/* -------------------- ÁLLATHANGOK -------------------- */
+
+.sound-game {
+  --game-main: #ffc107;
+  --game-dark: #9a7200;
+  --game-light: #fff9df;
+  --game-soft: #fff0ad;
+}
+
+/* -------------------- ÁLLATVÁLOGATÓ -------------------- */
+
+.sorter-game {
+  --game-main: #26b8aa;
+  --game-dark: #00796f;
+  --game-light: #e5faf7;
+  --game-soft: #d0f3ef;
+}
