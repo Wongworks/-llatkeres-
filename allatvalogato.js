@@ -13,7 +13,7 @@ let correctCount = 0;
 let checkingAnswer = false;
 
 let speechUnlocked = false;
-let hungarianVoice = null;
+let taskAudio = null;
 
 /* ---------------- TÁBLA ---------------- */
 
@@ -82,7 +82,7 @@ function newBoard() {
 
   checkingAnswer = false;
 
-  stopSpeaking();
+  stopTaskAudio();
 
   shuffleGrid();
   renderBoard();
@@ -99,21 +99,17 @@ function newTask() {
   selectedPositions = [];
   confirmedPositions = [];
 
-  stopSpeaking();
+  stopTaskAudio();
   clearBoardMarks();
 
   currentTask = chooseTask();
   lastTaskCategory = currentTask.category;
 
+  prepareTaskAudio();
   showTask();
 
   document.getElementById("message").innerText = "";
 
-  if (speechUnlocked) {
-    setTimeout(() => {
-      speakTask(currentTask.speechText);
-    }, 250);
-  }
 }
 
 /* ---------------- FELADAT KIVÁLASZTÁSA ---------------- */
@@ -136,7 +132,8 @@ function chooseTask() {
       category: "haziallat",
       count: 4,
       displayText: "Keress 4 háziállatot!",
-      speechText: "Keress négy háziállatot!"
+      speechText: "Keress négy háziállatot!",
+      soundFile: "haziallat-4.mp3"
     };
   }
 
@@ -361,7 +358,7 @@ function showWrongSelections(wrongSelections) {
 function handleCompletedTask() {
   checkingAnswer = true;
 
-  stopSpeaking();
+  stopTaskAudio();
   playOkSound();
 
   correctCount++;
@@ -397,22 +394,85 @@ function handleCompletedTask() {
   }, 800);
 }
 
-/* ---------------- FELOLVASÁS ---------------- */
+/* ---------------- FELADATHANG ---------------- */
 
-function loadHungarianVoice() {
-  if (!("speechSynthesis" in window)) {
+function prepareTaskAudio() {
+  stopTaskAudio();
+
+  if (!currentTask || !currentTask.soundFile) {
+    taskAudio = null;
+  }
+}
+
+function unlockAndSpeakTask() {
+  if (!currentTask || !currentTask.soundFile) {
+    document.getElementById("message").innerText =
+      "⚠️ Ehhez a feladathoz még nincs hangfájl.";
     return;
   }
 
-  const voices =
-    window.speechSynthesis.getVoices();
+  speechUnlocked = true;
 
-  hungarianVoice =
-    voices.find(voice => {
-      return voice.lang
-        .toLowerCase()
-        .startsWith("hu");
-    }) || null;
+  stopTaskAudio();
+
+  taskAudio = new Audio(
+    `sounds/speech/sorter/${currentTask.soundFile}`
+  );
+
+  taskAudio.volume = 1;
+  taskAudio.preload = "auto";
+
+  taskAudio.addEventListener(
+    "error",
+    () => {
+      document.getElementById("message").innerText =
+        "⚠️ A feladat hangja nem tölthető be.";
+    },
+    { once: true }
+  );
+
+  taskAudio.play()
+    .then(() => {
+      document.getElementById("message").innerText = "";
+    })
+    .catch(error => {
+      console.error("Feladathang-hiba:", error);
+
+      document.getElementById("message").innerText =
+        `⚠️ A hang nem indult el: ${error.name}`;
+    });
+}
+
+function playTaskAudio() {
+  if (!currentTask || !currentTask.soundFile) {
+    return;
+  }
+
+  stopTaskAudio();
+
+  taskAudio = new Audio(
+    `sounds/speech/sorter/${currentTask.soundFile}`
+  );
+
+  taskAudio.volume = 1;
+
+  taskAudio.play().catch(error => {
+    console.warn(
+      "Az automatikus lejátszást a böngésző blokkolta:",
+      error
+    );
+  });
+}
+
+function stopTaskAudio() {
+  if (!taskAudio) {
+    return;
+  }
+
+  taskAudio.pause();
+  taskAudio.removeAttribute("src");
+  taskAudio.load();
+  taskAudio = null;
 }
 
 function unlockAndSpeakTask() {
@@ -421,41 +481,32 @@ function unlockAndSpeakTask() {
   }
 
   speechUnlocked = true;
-  speakTask(currentTask.speechText);
+  playTaskAudio();
 }
 
-function speakTask(text) {
-  if (
-    !("speechSynthesis" in window) ||
-    !("SpeechSynthesisUtterance" in window)
-  ) {
+function playTaskAudio() {
+  if (!taskAudio) {
     document.getElementById("message").innerText =
-      "Ezen az eszközön a felolvasás nem érhető el.";
-
+      "⚠️ Ehhez a feladathoz még nincs hangfájl.";
     return;
   }
 
-  stopSpeaking();
+  taskAudio.pause();
+  taskAudio.currentTime = 0;
 
-  const utterance =
-    new SpeechSynthesisUtterance(text);
-
-  utterance.lang = "hu-HU";
-  utterance.rate = 0.82;
-  utterance.pitch = 1;
-  utterance.volume = 1;
-
-  if (hungarianVoice) {
-    utterance.voice = hungarianVoice;
-  }
-
-  window.speechSynthesis.speak(utterance);
+  taskAudio.play().catch(() => {
+    document.getElementById("message").innerText =
+      "Nyomd meg újra a hangszórót!";
+  });
 }
 
-function stopSpeaking() {
-  if ("speechSynthesis" in window) {
-    window.speechSynthesis.cancel();
+function stopTaskAudio() {
+  if (!taskAudio) {
+    return;
   }
+
+  taskAudio.pause();
+  taskAudio.currentTime = 0;
 }
 
 /* ---------------- JELÖLÉSEK TÖRLÉSE ---------------- */
@@ -471,21 +522,10 @@ function clearBoardMarks() {
   });
 }
 
-/* ---------------- FELOLVASÁS ELŐKÉSZÍTÉSE ---------------- */
-
-if ("speechSynthesis" in window) {
-  loadHungarianVoice();
-
-  window.speechSynthesis.addEventListener(
-    "voiceschanged",
-    loadHungarianVoice
-  );
-}
-
 /* ---------------- OLDAL ELHAGYÁSA ---------------- */
 
 window.addEventListener("beforeunload", () => {
-  stopSpeaking();
+  stopTaskAudio();
 });
 
 /* ---------------- START ---------------- */
