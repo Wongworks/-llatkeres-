@@ -179,18 +179,14 @@ document.getElementById("task").innerHTML = `
 /* ---------------- HANG ELŐKÉSZÍTÉSE ---------------- */
 
 function prepareAnimalSound() {
-  animalSound =
-    new Audio(
-      `sounds/animals/${targetAnimal}.wav`
-    );
+  stopAnimalSound();
+
+  animalSound = new Audio(
+    `sounds/animals/${targetAnimal}.mp3`
+  );
 
   animalSound.preload = "auto";
   animalSound.volume = 0.8;
-
-  animalSound.addEventListener("error", () => {
-    document.getElementById("message").innerText =
-      "⚠️ Ez a hangfájl nem tölthető be.";
-  });
 }
 
 /* ---------------- HANG LEJÁTSZÁSA ---------------- */
