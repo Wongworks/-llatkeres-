@@ -552,7 +552,8 @@ const categoryTasks = [
     category: "haziallat",
     count: 3,
     displayText: "Keress 3 háziállatot!",
-    speechText: "Keress három háziállatot!"
+    speechText: "Keress három háziállatot!",
+    soundFile: "haziallat-3.mp3"
   },
 
   {
@@ -560,7 +561,8 @@ const categoryTasks = [
     category: "haziallat",
     count: 5,
     displayText: "Jelölj meg 5 háziállatot!",
-    speechText: "Jelölj meg öt háziállatot!"
+    speechText: "Jelölj meg öt háziállatot!",
+    soundFile: "haziallat-5.mp3"
   },
 
   {
@@ -568,7 +570,8 @@ const categoryTasks = [
     category: "bundas",
     count: 4,
     displayText: "Válassz ki 4 bundás állatot!",
-    speechText: "Válassz ki négy bundás állatot!"
+    speechText: "Válassz ki négy bundás állatot!",
+    soundFile: "bundas-4.mp3"
   },
 
   {
@@ -576,7 +579,8 @@ const categoryTasks = [
     category: "bundas",
     count: 6,
     displayText: "Találj 6 olyan állatot, amelynek bundája van!",
-    speechText: "Találj hat olyan állatot, amelynek bundája van!"
+    speechText: "Találj hat olyan állatot, amelynek bundája van!",
+    soundFile: "bundas-6.mp3"
   },
 
   {
@@ -584,7 +588,8 @@ const categoryTasks = [
     category: "tollas",
     count: 3,
     displayText: "Keress 3 tollas állatot!",
-    speechText: "Keress három tollas állatot!"
+    speechText: "Keress három tollas állatot!",
+    soundFile: "tollas-3.mp3"
   },
 
   {
@@ -592,7 +597,8 @@ const categoryTasks = [
     category: "tollas",
     count: 4,
     displayText: "Jelölj meg 4 olyan állatot, amelynek tolla van!",
-    speechText: "Jelölj meg négy olyan állatot, amelynek tolla van!"
+    speechText: "Jelölj meg négy olyan állatot, amelynek tolla van!",
+    soundFile: "tollas-4.mp3"
   },
 
   {
@@ -600,7 +606,8 @@ const categoryTasks = [
     category: "negylabu",
     count: 4,
     displayText: "Keress 4 négylábú állatot!",
-    speechText: "Keress négy négylábú állatot!"
+    speechText: "Keress négy négylábú állatot!",
+    soundFile: "negylabu-4.mp3"
   },
 
   {
@@ -608,7 +615,8 @@ const categoryTasks = [
     category: "negylabu",
     count: 6,
     displayText: "Válassz ki 6 állatot, amelynek négy lába van!",
-    speechText: "Válassz ki hat állatot, amelynek négy lába van!"
+    speechText: "Válassz ki hat állatot, amelynek négy lába van!",
+    soundFile: "negylabu-6.mp3"
   },
 
   {
@@ -616,7 +624,8 @@ const categoryTasks = [
     category: "ketlabu",
     count: 3,
     displayText: "Találj 3 kétlábú állatot!",
-    speechText: "Találj három kétlábú állatot!"
+    speechText: "Találj három kétlábú állatot!",
+    soundFile: "ketlabu-3.mp3"
   },
 
   {
@@ -624,7 +633,8 @@ const categoryTasks = [
     category: "ketlabu",
     count: 4,
     displayText: "Keress 4 állatot, amelynek két lába van!",
-    speechText: "Keress négy állatot, amelynek két lába van!"
+    speechText: "Keress négy állatot, amelynek két lába van!",
+    soundFile: "ketlabu-4.mp3"
   },
 
   {
@@ -632,7 +642,8 @@ const categoryTasks = [
     category: "labNelkuli",
     count: 3,
     displayText: "Keress 3 láb nélküli állatot!",
-    speechText: "Keress három láb nélküli állatot!"
+    speechText: "Keress három láb nélküli állatot!",
+    soundFile: "labnelkuli-3.mp3"
   },
 
   {
@@ -640,7 +651,8 @@ const categoryTasks = [
     category: "labNelkuli",
     count: 4,
     displayText: "Jelölj meg 4 állatot, amelynek nincs lába!",
-    speechText: "Jelölj meg négy állatot, amelynek nincs lába!"
+    speechText: "Jelölj meg négy állatot, amelynek nincs lába!",
+    soundFile: "labnelkuli-4.mp3"
   },
 
   {
@@ -648,7 +660,8 @@ const categoryTasks = [
     category: "vizbenEl",
     count: 3,
     displayText: "Találj 3 vízben élő állatot!",
-    speechText: "Találj három vízben élő állatot!"
+    speechText: "Találj három vízben élő állatot!",
+    soundFile: "vizbenel-3.mp3"
   },
 
   {
@@ -656,7 +669,8 @@ const categoryTasks = [
     category: "vizbenEl",
     count: 4,
     displayText: "Keress 4 olyan állatot, amely a vízben él!",
-    speechText: "Keress négy olyan állatot, amely a vízben él!"
+    speechText: "Keress négy olyan állatot, amely a vízben él!",
+    soundFile: "vizbenel-4.mp3"
   },
 
   {
@@ -664,7 +678,8 @@ const categoryTasks = [
     category: "vizhezKotott",
     count: 4,
     displayText: "Jelölj meg 4 vízhez kötötten élő állatot!",
-    speechText: "Jelölj meg négy vízhez kötötten élő állatot!"
+    speechText: "Jelölj meg négy vízhez kötötten élő állatot!",
+    soundFile: "vizhezkotott-4.mp3"
   },
 
   {
@@ -672,7 +687,8 @@ const categoryTasks = [
     category: "vizhezKotott",
     count: 5,
     displayText: "Keress 5 állatot, amely sok időt tölt a víz közelében!",
-    speechText: "Keress öt állatot, amely sok időt tölt a víz közelében!"
+    speechText: "Keress öt állatot, amely sok időt tölt a víz közelében!",
+    soundFile: "vizhezkotott-5.mp3"
   },
 
   {
@@ -680,7 +696,8 @@ const categoryTasks = [
     category: "tojastRak",
     count: 4,
     displayText: "Keress 4 tojást rakó állatot!",
-    speechText: "Keress négy tojást rakó állatot!"
+    speechText: "Keress négy tojást rakó állatot!",
+    soundFile: "tojastrak-4.mp3"
   },
 
   {
@@ -688,7 +705,8 @@ const categoryTasks = [
     category: "tojastRak",
     count: 6,
     displayText: "Találj 6 olyan állatot, amely tojást rak!",
-    speechText: "Találj hat olyan állatot, amely tojást rak!"
+    speechText: "Találj hat olyan állatot, amely tojást rak!",
+    soundFile: "tojastrak-6.mp3"
   },
 
   {
@@ -696,7 +714,8 @@ const categoryTasks = [
     category: "vadallat",
     count: 4,
     displayText: "Jelölj meg 4 vadállatot!",
-    speechText: "Jelölj meg négy vadállatot!"
+    speechText: "Jelölj meg négy vadállatot!",
+    soundFile: "vadallat-4.mp3"
   },
 
   {
@@ -704,7 +723,8 @@ const categoryTasks = [
     category: "vadallat",
     count: 6,
     displayText: "Válassz ki 6 vadon élő állatot!",
-    speechText: "Válassz ki hat vadon élő állatot!"
+    speechText: "Válassz ki hat vadon élő állatot!",
+    soundFile: "vadallat-6.mp3"
   },
 
   {
@@ -712,7 +732,8 @@ const categoryTasks = [
     category: "repul",
     count: 2,
     displayText: "Keress 2 olyan állatot, amely tud repülni!",
-    speechText: "Keress két olyan állatot, amely tud repülni!"
+    speechText: "Keress két olyan állatot, amely tud repülni!",
+    soundFile: "repul-2.mp3"
   },
 
   {
@@ -720,7 +741,8 @@ const categoryTasks = [
     category: "szarvaVan",
     count: 3,
     displayText: "Keress 3 állatot, amelynek szarva vagy agancsa van!",
-    speechText: "Keress három állatot, amelynek szarva vagy agancsa van!"
+    speechText: "Keress három állatot, amelynek szarva vagy agancsa van!",
+    soundFile: "szarv-3.mp3"
   },
 
   {
@@ -728,7 +750,8 @@ const categoryTasks = [
     category: "csikos",
     count: 1,
     displayText: "Keresd meg a csíkos állatot!",
-    speechText: "Keresd meg a csíkos állatot!"
+    speechText: "Keresd meg a csíkos állatot!",
+    soundFile: "csikos-1.mp3"
   },
 
   /* ---------------- ÁLLATSZAKÉRTŐ ---------------- */
@@ -738,7 +761,8 @@ const categoryTasks = [
     category: "emlos",
     count: 4,
     displayText: "Keress 4 emlős állatot!",
-    speechText: "Keress négy emlős állatot!"
+    speechText: "Keress négy emlős állatot!",
+    soundFile: "emlos-4.mp3"
   },
 
   {
@@ -746,7 +770,8 @@ const categoryTasks = [
     category: "emlos",
     count: 6,
     displayText: "Jelölj meg 6 emlősállatot!",
-    speechText: "Jelölj meg hat emlősállatot!"
+    speechText: "Jelölj meg hat emlősállatot!",
+    soundFile: "emlos-6.mp3"
   },
 
   {
@@ -754,7 +779,8 @@ const categoryTasks = [
     category: "madar",
     count: 3,
     displayText: "Válassz ki 3 madarat!",
-    speechText: "Válassz ki három madarat!"
+    speechText: "Válassz ki három madarat!",
+    soundFile: "madar-3.mp3"
   },
 
   {
@@ -762,7 +788,8 @@ const categoryTasks = [
     category: "madar",
     count: 5,
     displayText: "Keresd meg mind az 5 madarat!",
-    speechText: "Keresd meg mind az öt madarat!"
+    speechText: "Keresd meg mind az öt madarat!",
+    soundFile: "madar-5.mp3"
   },
 
   {
@@ -770,7 +797,8 @@ const categoryTasks = [
     category: "hullo",
     count: 2,
     displayText: "Keress 2 hüllőt!",
-    speechText: "Keress két hüllőt!"
+    speechText: "Keress két hüllőt!",
+    soundFile: "hullo-2.mp3"
   },
 
   {
@@ -778,7 +806,8 @@ const categoryTasks = [
     category: "hullo",
     count: 4,
     displayText: "Keresd meg mind a 4 hüllőt!",
-    speechText: "Keresd meg mind a négy hüllőt!"
+    speechText: "Keresd meg mind a négy hüllőt!",
+    soundFile: "hullo-4.mp3"
   },
 
   {
@@ -786,7 +815,8 @@ const categoryTasks = [
     category: "keteltu",
     count: 1,
     displayText: "Keresd meg a kétéltű állatot!",
-    speechText: "Keresd meg a kétéltű állatot!"
+    speechText: "Keresd meg a kétéltű állatot!",
+    soundFile: "keteltu-1.mp3"
   },
 
   {
@@ -794,7 +824,8 @@ const categoryTasks = [
     category: "gerinces",
     count: 5,
     displayText: "Keress 5 gerinces állatot!",
-    speechText: "Keress öt gerinces állatot!"
+    speechText: "Keress öt gerinces állatot!",
+    soundFile: "gerinces-5.mp3"
   },
 
   {
@@ -802,7 +833,8 @@ const categoryTasks = [
     category: "gerinces",
     count: 7,
     displayText: "Jelölj meg 7 gerinces állatot!",
-    speechText: "Jelölj meg hét gerinces állatot!"
+    speechText: "Jelölj meg hét gerinces állatot!",
+    soundFile: "gerinces-7.mp3"
   },
 
   {
@@ -810,7 +842,8 @@ const categoryTasks = [
     category: "gerinctelen",
     count: 2,
     displayText: "Keress 2 gerinctelen állatot!",
-    speechText: "Keress két gerinctelen állatot!"
+    speechText: "Keress két gerinctelen állatot!",
+    soundFile: "gerinctelen-2.mp3"
   },
 
   {
@@ -818,23 +851,26 @@ const categoryTasks = [
     category: "gerinctelen",
     count: 3,
     displayText: "Keresd meg mind a 3 gerinctelen állatot!",
-    speechText: "Keresd meg mind a három gerinctelen állatot!"
+    speechText: "Keresd meg mind a három gerinctelen állatot!",
+    soundFile: "gerinctelen-3.mp3"
   },
 
   {
     mode: "szakerto",
-    category: "vízhez kötődő emlős",
+    category: "viziEmlos",
     count: 2,
     displayText: "Keress 2 vízi emlőst!",
-    speechText: "Keress két vízi emlőst!"
+    speechText: "Keress két vízi emlőst!",
+    soundFile: "viziemlos-2.mp3"
   },
 
   {
     mode: "szakerto",
-    category: "vízhez kötődő emlős",
+    category: "viziEmlos",
     count: 3,
     displayText: "Keresd meg mind a 3 vízhez kötődő emlőst!",
-    speechText: "Keresd meg mind a három vízhez kötődő emlőst!"
+    speechText: "Keresd meg mind a három vízhez kötődő emlőst!",
+    soundFile: "viziemlos-3.mp3"
   },
 
   {
@@ -842,7 +878,8 @@ const categoryTasks = [
     category: "tojastRak",
     count: 5,
     displayText: "Keress 5 tojást rakó állatot!",
-    speechText: "Keress öt tojást rakó állatot!"
+    speechText: "Keress öt tojást rakó állatot!",
+    soundFile: "tojastrak-5.mp3"
   },
 
   {
@@ -850,7 +887,8 @@ const categoryTasks = [
     category: "vizbenEl",
     count: 4,
     displayText: "Válassz ki 4 vízben élő állatot!",
-    speechText: "Válassz ki négy vízben élő állatot!"
+    speechText: "Válassz ki négy vízben élő állatot!",
+    soundFile: "vizbenel-4.mp3"
   }
 ];
 
