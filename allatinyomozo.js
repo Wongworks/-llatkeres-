@@ -50,7 +50,7 @@ patterns: [
   "szarvas",
   "tehen",
   "teknos",
-  "teve",
+  "lo",
   "vizilo",
   "zebra",
   "zsiraf"
