@@ -38,13 +38,17 @@
 
   </div>
 
-  <button
-    class="topbar-button topbar-shuffle"
-    onclick="newBoard()"
-    title="Új pálya"
-    aria-label="Új pálya"
-    data-icon="shuffle"
-  ></button>
+  <div class="topbar-actions">
+
+    <button
+      class="topbar-button topbar-shuffle"
+      onclick="newBoard()"
+      title="Új pálya"
+      aria-label="Új pálya"
+      data-icon="shuffle"
+    ></button>
+
+  </div>
 
 </header>
 
@@ -52,37 +56,37 @@
 
 <div class="truth-controls">
 
-<button
-  id="speakButton"
-  class="speak-button"
-  onclick="speakCurrentStatement()"
-  title="Feladat meghallgatása"
-  aria-label="Feladat meghallgatása"
->
-  🔊
-</button>
-
   <div class="truth-answer-row">
 
-    <button
-      class="truth-button true-button"
-      data-answer="true"
-      onclick="answerStatement(true, this)"
-    >
-      <span class="truth-icon">✅</span>
-      <span>IGAZ</span>
-    </button>
+  <button
+    class="truth-button true-button"
+    data-answer="true"
+    onclick="answerStatement(true, this)"
+  >
+    <span class="truth-icon">✅</span>
+    <span>IGAZ</span>
+  </button>
 
-    <button
-      class="truth-button false-button"
-      data-answer="false"
-      onclick="answerStatement(false, this)"
-    >
-      <span class="truth-icon">❌</span>
-      <span>HAMIS</span>
-    </button>
+  <button
+    id="legendBtn"
+    class="truth-button truth-legend-button"
+    onclick="openTruthLegend()"
+    title="Jelmagyarázat"
+    aria-label="Jelmagyarázat"
+  >
+    ?
+  </button>
 
-  </div>
+  <button
+    class="truth-button false-button"
+    data-answer="false"
+    onclick="answerStatement(false, this)"
+  >
+    <span class="truth-icon">❌</span>
+    <span>HAMIS</span>
+  </button>
+
+</div>
 
 </div>
 
@@ -90,6 +94,307 @@
 
 <div class="board-shell">
   <div id="board"></div>
+</div>
+<!-- JELMAGYARÁZAT -->
+
+<div
+  id="truthLegendModal"
+  class="truth-legend-modal"
+  aria-hidden="true"
+>
+  <div
+    class="truth-legend-box"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="truthLegendTitle"
+  >
+
+    <button
+      class="truth-legend-x"
+      onclick="closeTruthLegend()"
+      title="Bezárás"
+      aria-label="Jelmagyarázat bezárása"
+    >
+      ×
+    </button>
+
+    <h2 id="truthLegendTitle">
+      Jelek jelentése
+    </h2>
+
+    <p class="truth-legend-intro">
+      Az első állat helyét hasonlítsd össze a második állatéval!
+    </p>
+
+    <div class="truth-legend-grid">
+
+      <!-- VALAHOL BALRA -->
+
+      <div class="truth-legend-item">
+        <div class="truth-legend-example">
+          <img
+            src="images/animals_fixed/kutya.svg"
+            alt="kutya"
+          >
+          <span class="truth-legend-symbol">←</span>
+          <img
+            src="images/animals_fixed/teknos.svg"
+            alt="teknős"
+          >
+        </div>
+
+        <div class="truth-legend-label">
+          Valahol balra
+        </div>
+      </div>
+
+      <!-- VALAHOL JOBBRA -->
+
+      <div class="truth-legend-item">
+        <div class="truth-legend-example">
+          <img
+            src="images/animals_fixed/kutya.svg"
+            alt="kutya"
+          >
+          <span class="truth-legend-symbol">→</span>
+          <img
+            src="images/animals_fixed/teknos.svg"
+            alt="teknős"
+          >
+        </div>
+
+        <div class="truth-legend-label">
+          Valahol jobbra
+        </div>
+      </div>
+
+      <!-- VALAHOL FELETTE -->
+
+      <div class="truth-legend-item">
+        <div class="truth-legend-example">
+          <img
+            src="images/animals_fixed/kutya.svg"
+            alt="kutya"
+          >
+          <span class="truth-legend-symbol">↑</span>
+          <img
+            src="images/animals_fixed/teknos.svg"
+            alt="teknős"
+          >
+        </div>
+
+        <div class="truth-legend-label">
+          Valahol felette
+        </div>
+      </div>
+
+      <!-- VALAHOL ALATTA -->
+
+      <div class="truth-legend-item">
+        <div class="truth-legend-example">
+          <img
+            src="images/animals_fixed/kutya.svg"
+            alt="kutya"
+          >
+          <span class="truth-legend-symbol">↓</span>
+          <img
+            src="images/animals_fixed/teknos.svg"
+            alt="teknős"
+          >
+        </div>
+
+        <div class="truth-legend-label">
+          Valahol alatta
+        </div>
+      </div>
+
+      <!-- KÖZVETLENÜL BALRA -->
+
+      <div class="truth-legend-item truth-legend-direct">
+        <div class="truth-legend-example">
+          <img
+            src="images/animals_fixed/kutya.svg"
+            alt="kutya"
+          >
+          <span class="truth-legend-symbol">⇐</span>
+          <img
+            src="images/animals_fixed/teknos.svg"
+            alt="teknős"
+          >
+        </div>
+
+        <div class="truth-legend-label">
+          Közvetlenül balra
+        </div>
+      </div>
+
+      <!-- KÖZVETLENÜL JOBBRA -->
+
+      <div class="truth-legend-item truth-legend-direct">
+        <div class="truth-legend-example">
+          <img
+            src="images/animals_fixed/kutya.svg"
+            alt="kutya"
+          >
+          <span class="truth-legend-symbol">⇒</span>
+          <img
+            src="images/animals_fixed/teknos.svg"
+            alt="teknős"
+          >
+        </div>
+
+        <div class="truth-legend-label">
+          Közvetlenül jobbra
+        </div>
+      </div>
+
+      <!-- KÖZVETLENÜL FELETTE -->
+
+      <div class="truth-legend-item truth-legend-direct">
+        <div class="truth-legend-example">
+          <img
+            src="images/animals_fixed/kutya.svg"
+            alt="kutya"
+          >
+          <span class="truth-legend-symbol">⇑</span>
+          <img
+            src="images/animals_fixed/teknos.svg"
+            alt="teknős"
+          >
+        </div>
+
+        <div class="truth-legend-label">
+          Közvetlenül felette
+        </div>
+      </div>
+
+      <!-- KÖZVETLENÜL ALATTA -->
+
+      <div class="truth-legend-item truth-legend-direct">
+        <div class="truth-legend-example">
+          <img
+            src="images/animals_fixed/kutya.svg"
+            alt="kutya"
+          >
+          <span class="truth-legend-symbol">⇓</span>
+          <img
+            src="images/animals_fixed/teknos.svg"
+            alt="teknős"
+          >
+        </div>
+
+        <div class="truth-legend-label">
+          Közvetlenül alatta
+        </div>
+      </div>
+
+      <!-- ÁTLÓSAN -->
+
+      <div class="truth-legend-item">
+        <div class="truth-legend-example">
+          <img
+            src="images/animals_fixed/kutya.svg"
+            alt="kutya"
+          >
+          <span class="truth-legend-symbol truth-legend-diagonals">
+            ↖ ↗<br>↙ ↘
+          </span>
+          <img
+            src="images/animals_fixed/teknos.svg"
+            alt="teknős"
+          >
+        </div>
+
+        <div class="truth-legend-label">
+          Közvetlen átlós szomszéd
+        </div>
+      </div>
+
+      <!-- AZONOS SOR -->
+
+      <div class="truth-legend-item">
+        <div class="truth-legend-example">
+          <img
+            src="images/animals_fixed/kutya.svg"
+            alt="kutya"
+          >
+          <span class="truth-legend-symbol">—</span>
+          <img
+            src="images/animals_fixed/teknos.svg"
+            alt="teknős"
+          >
+        </div>
+
+        <div class="truth-legend-label">
+          Ugyanabban a sorban
+        </div>
+      </div>
+
+      <!-- AZONOS OSZLOP -->
+
+      <div class="truth-legend-item">
+        <div class="truth-legend-example">
+          <img
+            src="images/animals_fixed/kutya.svg"
+            alt="kutya"
+          >
+          <span class="truth-legend-symbol">│</span>
+          <img
+            src="images/animals_fixed/teknos.svg"
+            alt="teknős"
+          >
+        </div>
+
+        <div class="truth-legend-label">
+          Ugyanabban az oszlopban
+        </div>
+      </div>
+
+      <!-- KÖZÖTTE -->
+
+      <div class="truth-legend-item truth-legend-between">
+        <div class="truth-legend-example">
+          <img
+            src="images/animals_fixed/kutya.svg"
+            alt="kutya"
+          >
+
+          <span class="truth-legend-line">—</span>
+
+          <img
+            src="images/animals_fixed/beka.svg"
+            alt="béka"
+          >
+
+          <span class="truth-legend-line">—</span>
+
+          <img
+            src="images/animals_fixed/teknos.svg"
+            alt="teknős"
+          >
+        </div>
+
+        <div class="truth-legend-label">
+          A középső állat a két másik között van
+        </div>
+      </div>
+
+    </div>
+
+    <div class="truth-legend-tip">
+      <strong>Tipp:</strong>
+      az egyszeres nyíl azt jelenti, hogy az állat valahol arra van.
+      A kettős nyíl azt jelenti, hogy közvetlenül mellette található.
+    </div>
+
+    <button
+      class="truth-legend-close"
+      onclick="closeTruthLegend()"
+    >
+      Értem, kezdődhet!
+    </button>
+
+  </div>
 </div>
 
 <script src="icons.js"></script>

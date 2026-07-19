@@ -74,10 +74,13 @@
     <div class="card-hint">Merre vezet az út?</div>
   </button>
 
-  <button class="card red" onclick="openTruthModal()">
+  <button
+    class="card red"
+    onclick="location.href='igazhamis.html'"
+  >
     <div class="emoji">❓🐸</div>
     <div class="title">Igaz vagy<br>hamis?</div>
-    <div class="card-hint">Gondold át alaposan!</div>
+    <div class="card-hint">Fejtsd meg a jeleket!</div>
   </button>
 
   <button
@@ -262,58 +265,6 @@
   </div>
 </div>
 
-<!-- IGAZ VAGY HAMIS MÓDVÁLASZTÓ -->
-
-<!-- IGAZ VAGY HAMIS MÓDVÁLASZTÓ -->
-
-<div id="truthModal" class="modal">
-  <div class="modal-box adventure-modal red-modal">
-
-    <div class="modal-decoration modal-decoration-left">❓</div>
-    <div class="modal-decoration modal-decoration-right">💭</div>
-
-    <div class="modal-mascot">🐼</div>
-
-    <h2>Igaz vagy hamis?</h2>
-    <p class="modal-question">Melyik nyomozást választod?</p>
-
-    <button
-      class="mode-btn mano"
-      onclick="startTruthGame('allatnyomozo')"
-    >
-      <span class="mode-icon">🧸</span>
-
-      <span class="mode-content">
-        <strong>Állatnyomozó</strong>
-        <small>Egyszerűbb állítások</small>
-      </span>
-
-      <span class="mode-arrow">➜</span>
-    </button>
-
-    <button
-      class="mode-btn olvaso"
-      onclick="startTruthGame('mesternyomozo')"
-    >
-      <span class="mode-icon">🔎</span>
-
-      <span class="mode-content">
-        <strong>Mesternyomozó</strong>
-        <small>Összetettebb állítások</small>
-      </span>
-
-      <span class="mode-arrow">➜</span>
-    </button>
-
-    <button class="close-btn" onclick="closeTruthModal()">
-      ❓ Mégsem
-    </button>
-
-  </div>
-</div>
-
-<!-- ÁLLATVÁLOGATÓ MÓDVÁLASZTÓ -->
-
 <!-- ÁLLATVÁLOGATÓ MÓDVÁLASZTÓ -->
 
 <div id="sorterModal" class="modal">
@@ -401,20 +352,7 @@ function startArrowGame(mode) {
   localStorage.setItem("arrowGameMode", mode);
   location.href = "nyilak.html";
 }
-function openTruthModal() {
-  document.getElementById("truthModal").style.display =
-    "flex";
-}
 
-function closeTruthModal() {
-  document.getElementById("truthModal").style.display =
-    "none";
-}
-
-function startTruthGame(mode) {
-  localStorage.setItem("truthGameMode", mode);
-  location.href = "igazhamis.html";
-}
 function openSorterModal() {
   document.getElementById("sorterModal").style.display =
     "flex";

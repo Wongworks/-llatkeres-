@@ -48,37 +48,53 @@
 
 </header>
 
-<div id="task"></div>
+<div class="coordinate-layout">
 
-<div id="answerArea" class="coordinate-answer">
+  <div class="coordinate-left">
 
-  <div class="answer-row">
-    <button class="answer-btn letter-btn" data-value="A">A</button>
-    <button class="answer-btn letter-btn" data-value="B">B</button>
-    <button class="answer-btn letter-btn" data-value="C">C</button>
-    <button class="answer-btn letter-btn" data-value="D">D</button>
-    <button class="answer-btn letter-btn" data-value="E">E</button>
+    <div id="task"></div>
+
+    <div id="answerArea" class="coordinate-answer">
+
+      <div id="selectedCode" class="selected-code">__</div>
+
+      <div class="coordinate-choice-columns">
+
+        <div class="coordinate-choice-column">
+          <button class="answer-btn letter-btn" data-value="A">A</button>
+          <button class="answer-btn letter-btn" data-value="B">B</button>
+          <button class="answer-btn letter-btn" data-value="C">C</button>
+          <button class="answer-btn letter-btn" data-value="D">D</button>
+          <button class="answer-btn letter-btn" data-value="E">E</button>
+        </div>
+
+        <div class="coordinate-choice-column">
+          <button class="answer-btn number-btn" data-value="1">1</button>
+          <button class="answer-btn number-btn" data-value="2">2</button>
+          <button class="answer-btn number-btn" data-value="3">3</button>
+          <button class="answer-btn number-btn" data-value="4">4</button>
+          <button class="answer-btn number-btn" data-value="5">5</button>
+          <button class="answer-btn number-btn" data-value="6">6</button>
+          <button class="answer-btn number-btn" data-value="7">7</button>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <div class="answer-row">
-    <button class="answer-btn number-btn" data-value="1">1</button>
-    <button class="answer-btn number-btn" data-value="2">2</button>
-    <button class="answer-btn number-btn" data-value="3">3</button>
-    <button class="answer-btn number-btn" data-value="4">4</button>
-    <button class="answer-btn number-btn" data-value="5">5</button>
-    <button class="answer-btn number-btn" data-value="6">6</button>
-    <button class="answer-btn number-btn" data-value="7">7</button>
-  </div>
+  <div class="coordinate-right">
 
-  <div id="selectedCode" class="selected-code">_ _</div>
+    <div class="board-shell">
+      <div id="board"></div>
+    </div>
+
+  </div>
 
 </div>
 
 <p id="message"></p>
-
-<div class="board-shell">
-  <div id="board"></div>
-</div>
 
 <script src="icons.js"></script>
 <script src="common.js"></script>

@@ -693,7 +693,7 @@ h1 {
 /* -------------------- KÓDOLVASÓ -------------------- */
 
 .coordinate-answer {
-  width: min(94vw, 700px);
+  width: 100%;
   margin: 10px auto 18px;
   padding: 16px 18px;
 
@@ -777,7 +777,10 @@ h1 {
   width: 78px;
   height: 78px;
 }
-
+.coordinate-game .task-card {
+    width: 100%;
+    min-height: 110px;
+}
 /* -------------------- KÓDOLVASÓ MOBILON -------------------- */
 
 @media (max-width: 550px) {
@@ -4625,4 +4628,582 @@ body.sorter-game::before {
     height:31px;
 }
 
+}
+/* =========================================================
+   IGAZ VAGY HAMIS – JELMAGYARÁZAT
+   ========================================================= */
+
+.truth-help-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  margin: 4px auto 14px;
+  padding: 10px 17px;
+
+  border: 3px solid var(--game-main);
+  border-radius: 16px;
+
+  background: var(--game-light);
+  color: var(--game-dark);
+
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.14);
+
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.truth-help-button:hover {
+  transform: translateY(-2px) scale(1.03);
+  background: var(--game-soft);
+}
+
+.truth-help-button:active {
+  transform: scale(0.97);
+}
+
+/* ---------------- MODAL HÁTTÉR ---------------- */
+
+.truth-legend-modal {
+  position: fixed;
+  inset: 0;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(32, 24, 38, 0.62);
+  backdrop-filter: blur(4px);
+
+  z-index: 1000;
+}
+
+.truth-legend-modal.open {
+  display: flex;
+}
+
+body.truth-legend-open {
+  overflow: hidden;
+}
+
+/* ---------------- MODAL ABLAK ---------------- */
+
+.truth-legend-box {
+  position: relative;
+
+  width: min(920px, 95vw);
+  max-height: 90vh;
+  overflow-y: auto;
+
+  padding: 26px 28px 24px;
+
+  background: #ffffff;
+  border: 5px solid var(--game-main);
+  border-radius: 28px;
+
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 4px var(--game-light);
+
+  box-sizing: border-box;
+
+  animation: truthLegendOpen 0.22s ease;
+}
+
+@keyframes truthLegendOpen {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---------------- FEJLÉC ---------------- */
+
+.truth-legend-box h2 {
+  margin: 0 45px 6px;
+
+  color: var(--game-dark);
+
+  font-size: clamp(25px, 4vw, 34px);
+  text-align: center;
+}
+
+.truth-legend-intro {
+  margin: 0 auto 20px;
+
+  color: #4b3b4e;
+
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.truth-legend-x {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+
+  width: 42px;
+  height: 42px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: var(--game-soft);
+  color: var(--game-dark);
+
+  font-family: inherit;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.truth-legend-x:hover {
+  transform: scale(1.08);
+  background: var(--game-light);
+}
+
+/* ---------------- JELKÁRTYÁK ---------------- */
+
+.truth-legend-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.truth-legend-item {
+  min-height: 122px;
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  background: #fff;
+  border: 3px solid var(--game-soft);
+  border-radius: 19px;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.09);
+
+  box-sizing: border-box;
+}
+
+.truth-legend-item.truth-legend-direct {
+  border-color: var(--game-main);
+  background: var(--game-light);
+}
+
+.truth-legend-item.truth-legend-between {
+  grid-column: 1 / -1;
+}
+
+.truth-legend-example {
+  min-height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.truth-legend-example img {
+  width: 54px;
+  height: 54px;
+
+  object-fit: contain;
+}
+
+.truth-legend-symbol {
+  min-width: 50px;
+
+  color: var(--game-dark);
+
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+}
+
+.truth-legend-diagonals {
+  min-width: 70px;
+
+  font-size: 27px;
+  line-height: 0.9;
+}
+
+.truth-legend-line {
+  color: var(--game-dark);
+
+  font-size: 32px;
+  font-weight: 900;
+}
+
+.truth-legend-label {
+  color: #382b3b;
+
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: center;
+}
+
+/* ---------------- TIPP ÉS BEZÁRÁS ---------------- */
+
+.truth-legend-tip {
+  margin: 18px 0 16px;
+  padding: 13px 16px;
+
+  background: var(--game-light);
+  border-left: 6px solid var(--game-main);
+  border-radius: 14px;
+
+  color: #3e3141;
+
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.truth-legend-close {
+  display: block;
+
+  margin: 0 auto;
+  padding: 12px 22px;
+
+  border: 0;
+  border-radius: 17px;
+
+  background: var(--game-main);
+  color: #fff;
+
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.17);
+
+  transition: transform 0.15s ease;
+}
+
+.truth-legend-close:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.truth-legend-close:active {
+  transform: scale(0.97);
+}
+
+/* ---------------- MOBIL ---------------- */
+
+@media (max-width: 680px) {
+  .truth-legend-modal {
+    padding: 9px;
+  }
+
+  .truth-legend-box {
+    width: 100%;
+    max-height: 94vh;
+
+    padding: 22px 12px 18px;
+
+    border-width: 4px;
+    border-radius: 22px;
+  }
+
+  .truth-legend-grid {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .truth-legend-item {
+    min-height: 100px;
+    padding: 9px;
+  }
+
+  .truth-legend-item.truth-legend-between {
+    grid-column: auto;
+  }
+
+  .truth-legend-example img {
+    width: 46px;
+    height: 46px;
+  }
+
+  .truth-legend-symbol {
+    min-width: 42px;
+    font-size: 36px;
+  }
+
+  .truth-legend-diagonals {
+    min-width: 58px;
+    font-size: 24px;
+  }
+
+  .truth-legend-label {
+    font-size: 14px;
+  }
+
+  .truth-legend-tip {
+    margin-top: 13px;
+    font-size: 14px;
+  }
+
+  .truth-legend-close {
+    width: 100%;
+  }
+}
+
+/* ---------------- CSÖKKENTETT MOZGÁS ---------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .truth-legend-box {
+    animation: none;
+  }
+
+  .truth-help-button,
+  .truth-legend-x,
+  .truth-legend-close {
+    transition: none;
+  }
+}
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar-help {
+  font-family: inherit;
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 1;
+
+  color: var(--game-dark);
+  background: var(--game-light);
+}
+
+.topbar-help:hover {
+  background: var(--game-soft);
+  transform: translateY(-1px) scale(1.04);
+}
+
+.topbar-help:active {
+  transform: scale(0.96);
+}
+/* =========================================================
+   IGAZ VAGY HAMIS – TOPBAR JAVÍTÁS
+   ========================================================= */
+
+.truth-game .game-topbar {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+}
+
+.truth-game .game-title-panel {
+  min-width: 0;
+  width: 100%;
+}
+
+.truth-game .game-title-text {
+  min-width: 0;
+}
+
+.truth-game .game-title-text h1 {
+  white-space: nowrap;
+  font-size: clamp(26px, 4vw, 46px);
+}
+
+.truth-game .topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+}
+
+.truth-game .topbar-actions .topbar-button {
+  flex: 0 0 auto;
+}
+.truth-legend-button {
+    width: 72px;
+    height: 72px;
+    min-width: 72px;
+
+    padding: 0;
+
+    border: 4px solid #2196f3;
+    border-radius: 50%;
+
+    background: #ffffff;
+    color: #1565c0;
+
+    font-size: 2rem;
+    font-weight: 700;
+
+    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.14);
+
+    transition:
+        transform 0.15s,
+        background-color 0.15s;
+}
+
+.truth-legend-button:hover {
+    transform: scale(1.05);
+    background: #e3f2fd;
+}
+
+/* Kódolvasó – függőleges betű- és számoszlop */
+
+.coordinate-choice-columns {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 14px;
+}
+
+.coordinate-choice-column {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.coordinate-game .selected-code {
+  min-height: 44px;
+  margin: 0 0 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #222;
+
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.coordinate-game .coordinate-answer {
+  width: auto;
+  min-width: 165px;
+  padding: 12px 16px 16px;
+}
+
+.coordinate-game .coordinate-choice-column .answer-btn {
+  width: 56px;
+  height: 48px;
+}
+/* -------------------- KÓDOLVASÓ – VÉGLEGES ELRENDEZÉS -------------------- */
+
+.coordinate-layout {
+  width: min(96vw, 1180px);
+  margin: 14px auto 24px;
+
+  display: grid;
+  grid-template-columns: 190px auto;
+  align-items: start;
+  justify-content: center;
+  gap: 22px;
+}
+
+.coordinate-left {
+  width: 190px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.coordinate-right {
+  min-width: 0;
+}
+
+.coordinate-game #task {
+  margin: 0;
+}
+
+.coordinate-game .task-card {
+  width: 150px;
+  min-height: 115px;
+  padding: 12px;
+}
+
+.coordinate-game .coordinate-answer {
+  width: 165px;
+  min-width: 0;
+  margin: 0;
+  padding: 12px 10px 16px;
+}
+
+.coordinate-choice-columns {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 14px;
+}
+
+.coordinate-choice-column {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.coordinate-game .selected-code {
+  min-height: 38px;
+  margin: 0 0 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.coordinate-game .coordinate-choice-column .answer-btn {
+  width: 56px;
+  height: 48px;
+}
+
+.coordinate-game .board-shell {
+  margin: 0;
+}
+
+/* Csak valódi mobilnézetben kerül egymás alá */
+
+@media (max-width: 650px) {
+  .coordinate-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .coordinate-left {
+    width: 100%;
+  }
 }

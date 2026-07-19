@@ -81,19 +81,11 @@ const animalComparedToNames = {
   flamingo: "flamingóhoz"
 };
 
-/* ---------------- JÁTÉKMÓD ---------------- */
-
-const truthGameMode =
-  localStorage.getItem("truthGameMode") || "allatnyomozo";
-
 /* ---------------- ÁLLAPOT ---------------- */
 
 let currentStatement = null;
 let correctCount = 0;
 let checkingAnswer = false;
-
-let speechUnlocked = false;
-let hungarianVoice = null;
 
 /* ---------------- TÁBLA ---------------- */
 
@@ -152,8 +144,6 @@ function newBoard() {
   correctCount = 0;
   checkingAnswer = false;
 
-  stopSpeaking();
-
   shuffleGrid();
   renderBoard();
   newTask();
@@ -166,7 +156,6 @@ function newBoard() {
 function newTask() {
   checkingAnswer = false;
 
-  stopSpeaking();
   clearBoardMarks();
   clearAnswerButtons();
 
@@ -176,37 +165,26 @@ function newTask() {
 
   document.getElementById("message").innerText = "";
 
-  if (speechUnlocked) {
-    setTimeout(() => {
-      speakStatement(currentStatement.text);
-    }, 250);
-  }
-}
+ }
 
 /* ---------------- ÁLLÍTÁS LÉTREHOZÁSA ---------------- */
 
 function createStatement() {
   const desiredTruth = Math.random() < 0.5;
 
-  let relationTypes = [
-  "left",
-  "right",
-  "above",
-  "below",
-  "nextTo",
-  "directlyAbove",
-  "directlyBelow",
-  "sameRow",
-  "sameColumn"
-];
-
-if (truthGameMode === "mesternyomozo") {
-  relationTypes = [
-    ...relationTypes,
+  const relationTypes = [
+    "left",
+    "right",
+    "above",
+    "below",
+    "nextTo",
+    "directlyAbove",
+    "directlyBelow",
+    "sameRow",
+    "sameColumn",
     "diagonal",
     "between"
   ];
-}
 
   const relationType =
     relationTypes[
@@ -270,12 +248,14 @@ function createPairStatement(
     animalNames[secondAnimalId];
 
   const relationData =
-  getRelationData(
-    relationType,
-    firstAnimalName,
-    secondAnimalName,
-    secondAnimalId
-  );
+    getRelationData(
+      relationType,
+      firstAnimalName,
+      secondAnimalName,
+      secondAnimalId,
+      firstPosition,
+      secondPosition
+    );
 
   return {
     isTrue: desiredTruth,
@@ -599,7 +579,9 @@ function getRelationData(
   relationType,
   firstAnimalName,
   secondAnimalName,
-  secondAnimalId
+  secondAnimalId,
+  firstPosition,
+  secondPosition
 ) {
   const first =
     withArticle(firstAnimalName, false);
@@ -619,13 +601,28 @@ function getRelationData(
       true
     );
 
+  const firstCoordinates =
+    getCoordinates(firstPosition);
+
+  const secondCoordinates =
+    getCoordinates(secondPosition);
+
+  const colDifference =
+    firstCoordinates.colIndex -
+    secondCoordinates.colIndex;
+
+  const rowDifference =
+    firstCoordinates.rowIndex -
+    secondCoordinates.rowIndex;
+
   /* Valahol balra vagy jobbra */
 
   if (relationType === "left") {
     return {
       text:
         `${first} ${secondWithFrom} balra van.`,
-      symbol: "⬅"
+      symbol: "←",
+      layout: "horizontal"
     };
   }
 
@@ -633,17 +630,19 @@ function getRelationData(
     return {
       text:
         `${first} ${secondWithFrom} jobbra van.`,
-      symbol: "➡"
+      symbol: "→",
+      layout: "horizontal"
     };
   }
 
-  /* Valahol feljebb vagy lejjebb */
+  /* Valahol felette vagy alatta */
 
   if (relationType === "above") {
     return {
       text:
         `${first} ${secondComparedTo} képest felfelé van.`,
-      symbol: "⬆"
+      symbol: "↑",
+      layout: "vertical"
     };
   }
 
@@ -651,25 +650,39 @@ function getRelationData(
     return {
       text:
         `${first} ${secondComparedTo} képest lefelé van.`,
-      symbol: "⬇"
+      symbol: "↓",
+      layout: "vertical"
     };
   }
 
-  /* Közvetlen helyzetek */
+  /* Közvetlenül balra vagy jobbra */
 
   if (relationType === "nextTo") {
+    if (colDifference === -1) {
+      return {
+        text:
+          `${first} közvetlenül ${second} bal oldalán van.`,
+        symbol: "⇐",
+        layout: "horizontal"
+      };
+    }
+
     return {
       text:
-        `${first} ${second} mellett van.`,
-      symbol: "↔"
+        `${first} közvetlenül ${second} jobb oldalán van.`,
+      symbol: "⇒",
+      layout: "horizontal"
     };
   }
+
+  /* Közvetlenül felette vagy alatta */
 
   if (relationType === "directlyAbove") {
     return {
       text:
         `${first} közvetlenül ${second} felett van.`,
-      symbol: "⬆"
+      symbol: "⇑",
+      layout: "vertical"
     };
   }
 
@@ -677,15 +690,19 @@ function getRelationData(
     return {
       text:
         `${first} közvetlenül ${second} alatt van.`,
-      symbol: "⬇"
+      symbol: "⇓",
+      layout: "vertical"
     };
   }
+
+  /* Azonos sor vagy oszlop */
 
   if (relationType === "sameRow") {
     return {
       text:
         `${first} ugyanabban a sorban van, mint ${second}.`,
-      symbol: "↔"
+      symbol: "—",
+      layout: "horizontal"
     };
   }
 
@@ -693,21 +710,56 @@ function getRelationData(
     return {
       text:
         `${first} ugyanabban az oszlopban van, mint ${second}.`,
-      symbol: "↕"
+      symbol: "│",
+      layout: "vertical"
     };
   }
 
+  /* Közvetlen átlós helyzet */
+
   if (relationType === "diagonal") {
+    let diagonalSymbol = "↘";
+
+    if (
+      colDifference === -1 &&
+      rowDifference === -1
+    ) {
+      diagonalSymbol = "↖";
+    }
+
+    if (
+      colDifference === 1 &&
+      rowDifference === -1
+    ) {
+      diagonalSymbol = "↗";
+    }
+
+    if (
+      colDifference === -1 &&
+      rowDifference === 1
+    ) {
+      diagonalSymbol = "↙";
+    }
+
+    if (
+      colDifference === 1 &&
+      rowDifference === 1
+    ) {
+      diagonalSymbol = "↘";
+    }
+
     return {
       text:
-        `${first} ${second} mellett átlósan helyezkedik el.`,
-      symbol: "↘"
+        `${first} ${second} közvetlen átlós szomszédja.`,
+      symbol: diagonalSymbol,
+      layout: "diagonal"
     };
   }
 
   return {
     text: "",
-    symbol: "?"
+    symbol: "?",
+    layout: "horizontal"
   };
 }
 
@@ -725,10 +777,18 @@ function showStatement() {
   const secondAnimalName =
     animalNames[currentStatement.secondAnimalId];
 
+  const layoutClass =
+    currentStatement.layout === "vertical"
+      ? "visual-statement-vertical"
+      : "visual-statement-horizontal";
+
   document.getElementById("task").innerHTML = `
     <div class="task-card truth-task-card">
 
-      <div class="visual-statement">
+      <div
+        class="visual-statement ${layoutClass}"
+        aria-label="${currentStatement.text}"
+      >
 
         <img
           class="statement-animal"
@@ -736,7 +796,10 @@ function showStatement() {
           alt="${firstAnimalName}"
         >
 
-        <span class="statement-symbol">
+        <span
+          class="statement-symbol"
+          aria-hidden="true"
+        >
           ${currentStatement.symbol}
         </span>
 
@@ -746,10 +809,6 @@ function showStatement() {
           alt="${secondAnimalName}"
         >
 
-      </div>
-
-      <div class="statement-text">
-        ${currentStatement.text}
       </div>
 
     </div>
@@ -769,7 +828,10 @@ function showBetweenStatement() {
   document.getElementById("task").innerHTML = `
     <div class="task-card truth-task-card">
 
-      <div class="visual-statement between-statement">
+      <div
+        class="visual-statement between-statement"
+        aria-label="${currentStatement.text}"
+      >
 
         <img
           class="statement-animal"
@@ -795,10 +857,6 @@ function showBetweenStatement() {
 
       </div>
 
-      <div class="statement-text">
-        ${currentStatement.text}
-      </div>
-
     </div>
   `;
 }
@@ -820,7 +878,6 @@ function answerStatement(selectedAnswer, button) {
 /* ---------------- HELYES VÁLASZ ---------------- */
 
 function handleCorrectAnswer(button) {
-  stopSpeaking();
   playOkSound();
 
   correctCount++;
@@ -845,7 +902,6 @@ function handleCorrectAnswer(button) {
 /* ---------------- HIBÁS VÁLASZ ---------------- */
 
 function handleWrongAnswer(button) {
-  stopSpeaking();
   playBadSound();
 
   button.classList.add("truth-wrong");
@@ -903,85 +959,70 @@ function clearAnswerButtons() {
       );
     });
 }
+/* ---------------- JELMAGYARÁZAT ---------------- */
 
-/* ---------------- FELolVASÁS ---------------- */
+function openTruthLegend() {
+  const modal =
+    document.getElementById("truthLegendModal");
 
-function loadHungarianVoice() {
-  if (!("speechSynthesis" in window)) {
+  if (!modal) {
     return;
   }
 
-  const voices =
-    window.speechSynthesis.getVoices();
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
 
-  hungarianVoice =
-    voices.find(voice => {
-      return voice.lang
-        .toLowerCase()
-        .startsWith("hu");
-    }) || null;
-}
-
-function speakCurrentStatement() {
-  if (!currentStatement) return;
-
-  speechUnlocked = true;
-
-  speakStatement(currentStatement.text);
-}
-
-function speakStatement(text) {
-  if (
-    !("speechSynthesis" in window) ||
-    !("SpeechSynthesisUtterance" in window)
-  ) {
-    document.getElementById("message").innerText =
-      "Ezen az eszközön a felolvasás nem érhető el.";
-
-    return;
-  }
-
-  stopSpeaking();
-
- const utterance =
-  new SpeechSynthesisUtterance(text);
-
-  utterance.lang = "hu-HU";
-  utterance.rate = 0.82;
-  utterance.pitch = 1;
-  utterance.volume = 1;
-
-  if (hungarianVoice) {
-    utterance.voice = hungarianVoice;
-  }
-
-  window.speechSynthesis.speak(utterance);
-}
-
-function stopSpeaking() {
-  if ("speechSynthesis" in window) {
-    window.speechSynthesis.cancel();
-  }
-}
-
-/* ---------------- HANG ELŐKÉSZÍTÉSE ---------------- */
-
-if ("speechSynthesis" in window) {
-  loadHungarianVoice();
-
-  window.speechSynthesis.addEventListener(
-    "voiceschanged",
-    loadHungarianVoice
+  document.body.classList.add(
+    "truth-legend-open"
   );
-} else {
-  const speakButton =
-    document.getElementById("speakButton");
+}
 
-  if (speakButton) {
-    speakButton.disabled = true;
-    speakButton.title =
-      "A felolvasás nem érhető el";
+function closeTruthLegend() {
+  const modal =
+    document.getElementById("truthLegendModal");
+
+  if (!modal) {
+    return;
   }
+
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+
+  document.body.classList.remove(
+    "truth-legend-open"
+  );
+
+  localStorage.setItem(
+    "truthLegendSeen",
+    "true"
+  );
+}
+
+function setupTruthLegend() {
+  const modal =
+    document.getElementById("truthLegendModal");
+
+  if (!modal) {
+    return;
+  }
+
+  modal.addEventListener("click", event => {
+    if (event.target === modal) {
+      closeTruthLegend();
+    }
+  });
+
+  document.addEventListener(
+    "keydown",
+    event => {
+      if (
+        event.key === "Escape" &&
+        modal.classList.contains("open")
+      ) {
+        closeTruthLegend();
+      }
+    }
+  );
 }
 
 /* ---------------- START ---------------- */
@@ -989,3 +1030,15 @@ if ("speechSynthesis" in window) {
 shuffleGrid();
 renderBoard();
 newTask();
+
+setupTruthLegend();
+
+if (
+  localStorage.getItem(
+    "truthLegendSeen"
+  ) !== "true"
+) {
+  setTimeout(() => {
+    openTruthLegend();
+  }, 250);
+}
