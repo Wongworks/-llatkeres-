@@ -65,3 +65,11 @@
   --game-light: #e5faf7;
   --game-soft: #d0f3ef;
 }
+/* Állati nyomozó */
+
+.detective-game {
+  --game-main: #8d6e63;
+  --game-dark: #5d4037;
+  --game-light: #f4ebe7;
+  --game-soft: #eadbd4;
+}

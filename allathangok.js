@@ -21,8 +21,8 @@ const animalsWithSounds = [
 /* ---------------- ÁLLAPOT ---------------- */
 
 let targetAnimal = "";
-let targetPosition = "";
 let lastTargetAnimal = "";
+let boardAnimals = [];
 
 let animalSound = null;
 let animalSoundUnlocked = false;
@@ -30,61 +30,56 @@ let animalSoundUnlocked = false;
 let correctCount = 0;
 let checkingAnswer = false;
 
+/* ---------------- KEVERÉS ---------------- */
+function shuffleSoundAnimals() {
+  const result = [...animalsWithSounds];
+
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [result[i], result[j]] = [
+      result[j],
+      result[i]
+    ];
+  }
+
+  return result;
+}
 /* ---------------- TÁBLA ---------------- */
 
 function renderBoard() {
   const board = document.getElementById("board");
+
   board.innerHTML = "";
 
-  // Bal felső üres mező
-  board.appendChild(document.createElement("div"));
+  boardAnimals.forEach(animalId => {
+    const cell = document.createElement("button");
 
-  // Oszlopfejlécek
-  for (const col of cols) {
-    const header = document.createElement("div");
+    cell.type = "button";
+    cell.className = "detective-cell";
+    cell.dataset.animal = animalId;
 
-    header.className = "header";
-    header.innerText = col;
+    cell.setAttribute(
+      "aria-label",
+      animalNames[animalId] || animalId
+    );
 
-    board.appendChild(header);
-  }
+    const img = document.createElement("img");
 
-  // Sorok és állatok
-  for (const row of rows) {
-    const rowHeader = document.createElement("div");
+    img.src =
+      `images/animals_fixed/${animalId}.svg`;
 
-    rowHeader.className = "header";
-    rowHeader.innerText = row;
+    img.alt =
+      animalNames[animalId] || animalId;
 
-    board.appendChild(rowHeader);
+    cell.appendChild(img);
 
-    for (const col of cols) {
-      const key = col + row;
+    cell.addEventListener("click", () => {
+      checkAnswer(animalId, cell);
+    });
 
-      const cell = document.createElement("div");
-
-      cell.className = "cell";
-      cell.dataset.key = key;
-
-      const img = document.createElement("img");
-
-      img.src =
-        `images/animals_fixed/${grid[key]}.svg`;
-
-      img.className = "animal";
-
-      img.alt =
-        animalNames[grid[key]] || grid[key];
-
-      cell.appendChild(img);
-
-      cell.addEventListener("click", () => {
-        checkAnswer(key, cell);
-      });
-
-      board.appendChild(cell);
-    }
-  }
+    board.appendChild(cell);
+  });
 }
 
 /* ---------------- ÚJ PÁLYA ---------------- */
@@ -96,7 +91,8 @@ function newBoard() {
 
   stopAnimalSound();
 
-  shuffleGrid();
+  boardAnimals = shuffleSoundAnimals();
+
   renderBoard();
   newTask();
 
@@ -125,8 +121,6 @@ function newTask() {
 
   lastTargetAnimal = targetAnimal;
 
-  targetPosition = findAnimalPosition(targetAnimal);
-
   prepareAnimalSound();
   showTask();
 
@@ -139,18 +133,6 @@ function newTask() {
       playAnimalSound();
     }, 250);
   }
-}
-
-/* ---------------- ÁLLAT HELYÉNEK MEGKERESÉSE ---------------- */
-
-function findAnimalPosition(animalId) {
-  const positions = Object.keys(grid);
-
-  return (
-    positions.find(position => {
-      return grid[position] === animalId;
-    }) || ""
-  );
 }
 
 /* ---------------- FELADATKÁRTYA ---------------- */
@@ -219,10 +201,10 @@ function stopAnimalSound() {
 
 /* ---------------- VÁLASZ ELLENŐRZÉSE ---------------- */
 
-function checkAnswer(selectedPosition, selectedCell) {
+function checkAnswer(selectedAnimal, selectedCell) {
   if (checkingAnswer) return;
 
-  if (selectedPosition === targetPosition) {
+  if (selectedAnimal === targetAnimal) {
     handleCorrectAnswer(selectedCell);
   } else {
     handleWrongAnswer(selectedCell);
@@ -239,7 +221,7 @@ function handleCorrectAnswer(selectedCell) {
 
   correctCount++;
 
-  selectedCell.classList.add("correct");
+  selectedCell.classList.add("detective-correct");
 
   document.getElementById("message").innerText =
     "🎉 Helyes!";
@@ -261,7 +243,7 @@ function handleWrongAnswer(selectedCell) {
 
   playBadSound();
 
-  selectedCell.classList.add("wrong");
+  selectedCell.classList.add("detective-wrong");
 
   const randomWrong =
     wrongMessages[
@@ -272,7 +254,7 @@ function handleWrongAnswer(selectedCell) {
     randomWrong;
 
   setTimeout(() => {
-    selectedCell.classList.remove("wrong");
+    selectedCell.classList.remove("detective-wrong");
     checkingAnswer = false;
   }, 650);
 }
@@ -280,14 +262,14 @@ function handleWrongAnswer(selectedCell) {
 /* ---------------- JELÖLÉSEK TÖRLÉSE ---------------- */
 
 function clearBoardMarks() {
-  document.querySelectorAll(".cell").forEach(cell => {
-    cell.classList.remove(
-      "correct",
-      "wrong",
-      "selected",
-      "start-position"
-    );
-  });
+  document
+    .querySelectorAll(".detective-cell")
+    .forEach(cell => {
+      cell.classList.remove(
+        "detective-correct",
+        "detective-wrong"
+      );
+    });
 }
 
 /* ---------------- OLDAL ELHAGYÁSA ---------------- */
@@ -298,6 +280,7 @@ window.addEventListener("beforeunload", () => {
 
 /* ---------------- START ---------------- */
 
-shuffleGrid();
+boardAnimals = shuffleSoundAnimals();
+
 renderBoard();
 newTask();

@@ -84,21 +84,21 @@
   </button>
 
   <button
-    class="card yellow"
-    onclick="location.href='allathangok.html'"
-  >
-    <div class="emoji">🔊🐓</div>
-    <div class="title">Állathangok</div>
-    <div class="card-hint">Ki lehet az?</div>
-  </button>
-
-  <button
     class="card turquoise"
     onclick="openSorterModal()"
   >
     <div class="emoji">🧺🐿️</div>
     <div class="title">Állatválogató</div>
     <div class="card-hint">Válogasd szét őket!</div>
+  </button>
+
+  <button
+    class="card brown"
+    onclick="openDetectiveModal()"
+  >
+    <div class="emoji">🐾🕵️</div>
+    <div class="title">Állati<br>nyomozó</div>
+    <div class="card-hint">Kinek a nyoma?</div>
   </button>
 
 </div>
@@ -312,6 +312,69 @@
 
   </div>
 </div>
+<!-- ÁLLATI NYOMOZÓ MÓDVÁLASZTÓ -->
+
+<div id="detectiveModal" class="modal">
+  <div class="modal-box adventure-modal brown-modal">
+
+    <div class="modal-decoration modal-decoration-left">🔎</div>
+    <div class="modal-decoration modal-decoration-right">🐾</div>
+
+    <div class="modal-mascot">🕵️</div>
+
+<h2>Állati nyomozó</h2>
+<p class="modal-question">
+  Melyik nyomot szeretnéd megfejteni?
+</p>
+
+<button
+  class="mode-btn olvaso"
+  onclick="location.href='allathangok.html'"
+>
+  <span class="mode-icon">🔊</span>
+
+  <span class="mode-content">
+    <strong>Állathangok</strong>
+    <small>Találd meg az állatot a hangja alapján!</small>
+  </span>
+
+  <span class="mode-arrow">➜</span>
+</button>
+
+<button
+  class="mode-btn mano"
+  onclick="startDetectiveGame('tracks')"
+>
+  <span class="mode-icon">🐾</span>
+
+  <span class="mode-content">
+    <strong>Lábnyomok</strong>
+    <small>Találd meg, melyik állathoz tartozik!</small>
+  </span>
+
+  <span class="mode-arrow">➜</span>
+</button>
+
+<button
+  class="mode-btn olvaso"
+  onclick="startDetectiveGame('patterns')"
+>
+  <span class="mode-icon">🦓</span>
+
+  <span class="mode-content">
+    <strong>Kültakaró</strong>
+    <small>Bunda, toll, pikkely és páncél alapján</small>
+  </span>
+
+  <span class="mode-arrow">➜</span>
+</button>
+
+    <button class="close-btn" onclick="closeDetectiveModal()">
+      🔎 Mégsem
+    </button>
+
+  </div>
+</div>
 
 <script>
 function openModeModal() {
@@ -366,6 +429,20 @@ function closeSorterModal() {
 function startSorterGame(mode) {
   localStorage.setItem("sortingGameMode", mode);
   location.href = "allatvalogato.html";
+}
+function openDetectiveModal() {
+  document.getElementById("detectiveModal").style.display =
+    "flex";
+}
+
+function closeDetectiveModal() {
+  document.getElementById("detectiveModal").style.display =
+    "none";
+}
+
+function startDetectiveGame(mode) {
+  localStorage.setItem("animalDetectiveMode", mode);
+  location.href = "allatinyomozo.html";
 }
 </script>
 
